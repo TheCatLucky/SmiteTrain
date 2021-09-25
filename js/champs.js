@@ -21,12 +21,12 @@ window.champions =
                 if (chance < ch) {
                     DamageTest = ((ad * ( 1 + cd)).toFixed(0))* 0.5;
                     BaronHpCurrent -= DamageTest ;
-                    logZone.insertAdjacentHTML("beforeend", `Ари нанесла ${DamageTest} крит урона`)
+                    //logZone.insertAdjacentHTML("beforeend", `Ари нанесла ${DamageTest} крит урона`)
                     return BaronHpCurrent;}
 
                 else {DamageTest = ad * 0.5;
                 BaronHpCurrent -= DamageTest ;
-                logZone.insertAdjacentHTML("beforeend",`<p>Ари нанесла ${DamageTest} урона</p>`);
+                //logZone.insertAdjacentHTML("beforeend",`<p>Ари нанесла ${DamageTest} урона</p>`);
                 return BaronHpCurrent};
             },Math.random() * (500 - 100 + 1)+ 100) 
         },
@@ -51,13 +51,13 @@ window.champions =
                     return ;} 
 
                 if (chance < ch) {
-                    DamageTest = (ad * ( 1 + cd)).toFixed(0);
-                    BaronHpCurrent -= DamageTest * 0.5;
+                    DamageTest = (ad * ( 1 + cd)).toFixed(0)* 0.5;
+                    BaronHpCurrent -= DamageTest ;
                     console.log(`Диана нанесла ${DamageTest} крит урона`)
                     return BaronHpCurrent;}
 
-                else {DamageTest = ad;
-                BaronHpCurrent -= DamageTest * 0.5;
+                else {DamageTest = ad* 0.5;
+                BaronHpCurrent -= DamageTest ;
                 console.log(`Диана нанесла ${DamageTest} урона`)};
                 return BaronHpCurrent;;
             },Math.random() * (500 - 100 + 1)+ 100) 
@@ -81,13 +81,13 @@ window.champions =
                     return ;} 
 
                 if (chance < ch) {
-                    DamageTest = (ad * ( 1 + cd)).toFixed(0);
-                    BaronHpCurrent -= DamageTest * 0.5;
+                    DamageTest = (ad * ( 1 + cd)).toFixed(0)* 0.5;
+                    BaronHpCurrent -= DamageTest ;
                     console.log(`Кейтлин нанесла ${DamageTest} крит урона`)
                     return BaronHpCurrent;}
 
-                else {DamageTest = ad;
-                BaronHpCurrent -= DamageTest * 0.5;
+                else {DamageTest = ad* 0.5;
+                BaronHpCurrent -= DamageTest ;
                 console.log(`Кейтлин нанесла ${DamageTest} урона`)};
                 return BaronHpCurrent;;
             },Math.random() * (500 - 100 + 1)+ 100) 
@@ -111,13 +111,13 @@ window.champions =
                     return ;} 
 
                 if (chance < ch) {
-                    DamageTest = (ad * ( 1 + cd)).toFixed(0);
-                    BaronHpCurrent -= DamageTest * 0.5;
+                    DamageTest = (ad * ( 1 + cd)).toFixed(0) * 0.5;
+                    BaronHpCurrent -= DamageTest ;
                     console.log(`Кассиопея нанесла ${DamageTest} крит урона`)
                     return BaronHpCurrent;}
 
-                else {DamageTest = ad;
-                BaronHpCurrent -= DamageTest * 0.5;
+                else {DamageTest = ad * 0.5;
+                BaronHpCurrent -= DamageTest ;
                 console.log(`Кассиопея нанесла ${DamageTest} урона`)};
                 return BaronHpCurrent;;
             },Math.random() * (500 - 100 + 1)+ 100) 
@@ -141,13 +141,13 @@ window.champions =
                     return ;} 
 
                 if (chance < ch) {
-                    DamageTest = (ad * ( 1 + cd)).toFixed(0);
-                    BaronHpCurrent -= DamageTest * 0.5;
+                    DamageTest = (ad * ( 1 + cd)).toFixed(0) * 0.5;
+                    BaronHpCurrent -= DamageTest;
                     console.log(`Зиггс нанес ${DamageTest} крит урона`)
                     return BaronHpCurrent;}
 
-                else {DamageTest = ad;
-                BaronHpCurrent -= DamageTest * 0.5;
+                else {DamageTest = ad* 0.5;
+                BaronHpCurrent -= DamageTest ;
                 console.log(`Зиггс нанес ${DamageTest} урона`)};
                 return BaronHpCurrent;;
             },Math.random() * (500 - 100 + 1)+ 100) 

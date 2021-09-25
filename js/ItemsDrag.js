@@ -6,7 +6,7 @@ setInterval(function() {
   
   for (let elem of parent){
   
-  elem.addEventListener("mousedown", test);
+  elem.addEventListener("mousedown", refreshItem);
   elem.addEventListener("mousedown", move);
  
   elem.ondragstart = function() {
@@ -15,7 +15,7 @@ setInterval(function() {
   };
 }},1000);
   
-     function test(event){
+     function refreshItem(event){
       let test = event.target;
       let place = event.target.parentNode;
       

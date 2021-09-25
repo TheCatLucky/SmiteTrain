@@ -38,12 +38,12 @@ function SelectChamp(){
     
     
     div.innerHTML = `<button  class="ChampButton" ">${picture}</button>
-    <div class = "Stats">
-    <p>Ad ${champs[name]["Ad lvl 1"]}</p>
-    <p>Ap ${champs[name]["Ap"]}</p>
-    <p>As ${champs[name]["As lvl 1"]}</p>
-    <p>Ch ${champs[name]["Crit Chance"]}</p>
-    <p>Cd ${champs[name]["Crit Damage"]}</p>
+    <div class = "Stats${name}">
+    <p class="Ap${name}">Ap ${champs[name]["Ap"]}</p>
+    <p class="Ad${name}">Ad ${champs[name]["Ad lvl 1"]}</p>
+    <p class="As${name}">As ${champs[name]["As lvl 1"]}</p>
+    <p class="Ch${name}">Ch ${champs[name]["Crit Chance"]}</p>
+    <p class="Cd${name}">Cd ${champs[name]["Crit Damage"]}</p>
     </div>
     <table  class="table" data-champName="${name}">
     <tr>
@@ -95,9 +95,10 @@ function ShowChamp(){ // вывод объекта персонажа
 }
 
 function Damage() {
-    // champs[img.alt].HandDamage(champs[img.alt]["Ad lvl 1"],champs[img.alt]["As lvl 1"],0.5,1.2)// тест. рабочий
-    let zone = Array.from(field.querySelectorAll("img"));
+    let zone = field.querySelectorAll("img.ChampSelected");
+    console.log(zone)
     Array.from(zone).forEach(img => champs[img.alt].HandDamage(champs[img.alt]["Ad lvl 1"],champs[img.alt]["As lvl 1"],champs[img.alt]["Crit Chance"],champs[img.alt]["Crit Damage"]));
+
     BaronHpCurrent -= damage;   
     span.innerHTML = `${BaronHpCurrent.toFixed(0)}`;
     return BaronHpCurrent;
@@ -140,15 +141,19 @@ function BaronHpCheck (){                               //все работае�
 function calcStats(){
     let champTables = document.querySelectorAll(".table td");
     for (let childs of champTables ){
-        for (let itemsz of childs.childNodes){//название переменной изменить
-            let itemEquiped = itemsz.getAttribute("name");//название переменной изменить
+        for (let itemsOnChamp of childs.childNodes){//название переменной изменить
+            let itemEquiped = itemsOnChamp.getAttribute("name");//название переменной изменить
             let champEquiped = childs.parentNode.parentNode.parentNode.getAttribute("data-champName");
-            console.log(itemEquiped);
+            //console.log(itemEquiped);
             console.log(champEquiped);
-           //champs[champEquiped]["Ad lvl 1"] += +items[itemEquiped].Ad || 0;
-           //champs[champEquiped][Ap] += +items[itemEquiped][Ap] || 0;
+
+
+           let newAd = champs[champEquiped]["Ad lvl 1"] += +items[itemEquiped].Ad || 0;
+           let newAp = champs[champEquiped].Ap += +items[itemEquiped].Ap || 0;
            
-            console.log(items[itemEquiped].Ap);
+        
+           $(`.Ap${champEquiped}`)[0].innerHTML = `Ap ${newAp}`;
+           $(`.Ad${champEquiped}`)[0].innerHTML = `Ad ${newAd}`;
         }
        
     }
