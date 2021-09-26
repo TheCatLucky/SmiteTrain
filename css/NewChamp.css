@@ -2,7 +2,181 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
 }
-.newChamp{
-    margin-bottom: 20px;
+.buttons{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.SetUpMenu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+.ChampButton,.ItemButton{
+    margin: 5px;
+    padding: 0;
+    border: none;
+    height: 50px;
+    width: 50px;
+}
+
+.ChampButton:hover{
+    box-shadow: 0px 0px 0px 10px red;;
+}
+.BaronNashor{
+    display: flex;
+    flex-direction: column;
+}
+#Hp{
+    text-align: center;
+    margin-bottom: 5px;
+}
+.BaronNashorHpText{
+    text-align: center;
+}
+.hpBar{
+    display: flex;
+    justify-content: center;
+}
+#perc {
+    width:667px;
+    border:1px solid blue;
+    padding:0px;
+}
+
+#perc_in {
+    height: 30px;
+    width:100%;
+    font-size:17pt;
+    background:red;
+}
+.champ_intro{
+    text-align: center;
+}
+.logZone{
+    float: right;
+    margin-top: 20px;
+    height: 300px;
+    width: 30%;
+    background-color: yellowgreen;
+    overflow: auto;
+}
+.logZone > p {
+    padding-top: 5px;
+}
+
+#champions_list, .items_list{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+#champions_field{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    position:absolute;
+    bottom:50px;
+}
+#champions_field > div {
+    margin-left: 50px;
+    height: 110px;
+    width: 255px;
+    background-color: indianred;
+
+}
+.log1 {
+    position: relative;
+    left: 0px;
+    width: 500px;
+    height: 200px;
+    background: hsla(207, 44%, 49%, 0.4);
+    margin-top: 5px;
+    transition: left .7s linear;
+}
+#ChampArrow{
+      position: relative;
+      float: right;
+      top: 85px;;
+}
+  
+.log2 {
+    position: relative;
+    left: -380px;
+    width: 500px;
+    height: 200px;
+    background:hsla(207, 44%, 49%, 0.4);
+    margin-top: 5px;
+    transition: left .7s linear;
+}
+.items_in {
+    position: relative;
+    right: 0px;
+    width: 500px;
+    height: 200px;
+    background: hsla(207, 44%, 49%, 0.4);
+    margin-top: 5px;
+    transition: right .7s linear;
+}
+#ItemArrow{
+    position: relative;
+    float: left;
+    top: 85px;;
+    transform: rotate(180deg);
+}
+  
+.items_out {
+    position: relative;
+    right: -380px;
+    width: 500px;
+    height: 200px;
+    background:hsla(207, 44%, 49%, 0.4);
+    margin-top: 5px;
+    transition: right .7s linear;
+}
+.droppable{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.MenuChamp{
+    display: flex;
+    flex-direction: column;
+}
+.lvl{
+    background-color: tomato;
+    margin: 5px 0px 0px 5px;
+    height: 40px;
+    width: 50px;
+    font-size: 24px;
+}
+.droppable .Stats{
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.table{
+    margin:10px 5px 10px 0px;
+    position: relative;
+    border: 1px solid;
+    border-collapse: separate;  
+    padding: 0;
+    
+}
+
+.table td {
+    border: 1px solid;
+    width: 42px;
+    height: 42px;
+}
+.table td > img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    padding: 0px;
 }

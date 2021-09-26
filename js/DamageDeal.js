@@ -7,11 +7,10 @@ let field = document.getElementById(`champions_field`);
 let champList = document.getElementById(`champions_list`);
 let buttons = document.querySelectorAll('.ChampImg');// поле выбора персов
 let img = document.querySelector('img');
-let logZone = document.getElementById('log');
-//урон
-let damage = 0;
+let logZone = document.querySelector('.logZone');
+
 //барон
-let BaronHpMax = 1000;
+let BaronHpMax = 2000;
 let BaronHpRegen = 15;
 let BaronHpCurrent = BaronHpMax;
 
@@ -30,15 +29,17 @@ function SelectChamp(){
     target.removeAttribute(`listener`);
 
     let name = target.getAttribute('data-object');
-    let picture = `<img src="../img/${name}.png" alt="${name}" id="${name}remove" class="ChampSelected"></img>`;
+    let picture = `<img src="../img/${name}.png" alt="${name}" id="${name}remove" class="ChampSelected" width="50px" height="50px"></img>`;
     
     let div = document.createElement('div');
     field.append(div);
     div.className = `droppable ${name}`;
     
     
-    div.innerHTML = `<button  class="ChampButton" ">${picture}</button>
-    <div class = "Stats${name}">
+    div.innerHTML = `<div class = "MenuChamp"><button  class="ChampButton" ">${picture}</button>
+    <input type="number" max="18" value="1" class="lvl lvl${name}""></div>
+    <div class = " Stats${name} Stats">
+    
     <p class="Ap${name}">Ap ${champs[name]["Ap"]}</p>
     <p class="Ad${name}">Ad ${champs[name]["Ad lvl 1"]}</p>
     <p class="As${name}">As ${champs[name]["As lvl 1"]}</p>
@@ -61,6 +62,11 @@ function SelectChamp(){
     Array.from(field.children).forEach(function(pict){
         pict.addEventListener("click",RemoveChamp,{once:true})
     });
+    $(`.lvl${name}`).on("input",function (){
+        if ($(`.lvl${name}`).val() > 18){
+            $(`.lvl${name}`).val("18");
+        }
+    });
     
     
     //console.log(BaronHpCurrent);
@@ -72,7 +78,7 @@ function RemoveChamp(){
     let ChampName = name.substring(0, name.length -6)
     let name2= document.getElementById(`${ChampName}`)
     if (target.tagName != 'IMG') return;
-    let targetRemove = document.getElementById(`${name}`).parentNode.parentNode;
+    let targetRemove = document.getElementById(`${name}`).parentNode.parentNode.parentNode;
     targetRemove.remove();
     Array.from(buttons).forEach(function(btn) {
         let result = btn.hasAttribute(`listener`);
@@ -96,10 +102,8 @@ function ShowChamp(){ // вывод объекта персонажа
 
 function Damage() {
     let zone = field.querySelectorAll("img.ChampSelected");
-    console.log(zone)
-    Array.from(zone).forEach(img => champs[img.alt].HandDamage(champs[img.alt]["Ad lvl 1"],champs[img.alt]["As lvl 1"],champs[img.alt]["Crit Chance"],champs[img.alt]["Crit Damage"]));
-
-    BaronHpCurrent -= damage;   
+    Array.from(zone).forEach(img => champs[img.alt].HandDamage(champs[img.alt][`Ad lvl ${$(`.lvl${img.alt}`).val()}`],champs[img.alt][`As lvl ${$(`.lvl${img.alt}`).val()}`],champs[img.alt]["Crit Chance"],champs[img.alt]["Crit Damage"]));
+  
     span.innerHTML = `${BaronHpCurrent.toFixed(0)}`;
     return BaronHpCurrent;
 
@@ -120,19 +124,27 @@ function BaronHpReg(){  //все работает. не трогать. оста
     return BaronHpCurrent}
     },0)
 }
-
-
+function autoSmite(){
+    let smite = setTimeout( function Smite() {
+        smite = setTimeout(Smite,Math.random()*(500)+500);
+        if(BaronHpCurrent <= 900) {
+            console.log (`Вы не успели засмайтить!
+            Вражеский лесник засмайтил на ${BaronHpCurrent} ХП!`)
+            BaronHpCurrent -=900;
+            clearTimeout(smite);
+            return BaronHpCurrent;}
+        },0)}
 function BaronHpCheck (){                               //все работает. не трогать
     let HpBar = document.getElementById(`perc_in`);
     let HpBarPercent = BaronHpMax / 100;
     let BaronHpCheck = setTimeout( function BaronHpCheckRecursion(){
-        BaronHpCheck = setTimeout(BaronHpCheckRecursion,100);
+        BaronHpCheck = setTimeout(BaronHpCheckRecursion,100); 
         if (BaronHpCurrent <= 0) {
         span.innerHTML = "0";
-        console.log(span);
         document.getElementById(`perc_in`).style.width=0+"%";
         clearTimeout(BaronHpCheck);
         return ;}
+
         let CurrentHpBarPercent = (BaronHpCurrent / HpBarPercent);
         span.innerHTML = `${BaronHpCurrent.toFixed(0)}`;
         HpBar.style.width=CurrentHpBarPercent+"%"; 
@@ -146,23 +158,30 @@ function calcStats(){
             let champEquiped = childs.parentNode.parentNode.parentNode.getAttribute("data-champName");
             //console.log(itemEquiped);
             console.log(champEquiped);
+                      
 
-
-           let newAd = champs[champEquiped]["Ad lvl 1"] += +items[itemEquiped].Ad || 0;
-           let newAp = champs[champEquiped].Ap += +items[itemEquiped].Ap || 0;
-           
-        
-           $(`.Ap${champEquiped}`)[0].innerHTML = `Ap ${newAp}`;
-           $(`.Ad${champEquiped}`)[0].innerHTML = `Ad ${newAd}`;
+            let newAd = champs[champEquiped][`Ad lvl ${$(`.lvl${champEquiped}`).val()}`] += +items[itemEquiped].Ad || 0;
+            let newAp = champs[champEquiped].Ap += +items[itemEquiped].Ap || 0;
+            let newAs = champs[champEquiped][`As lvl ${$(`.lvl${champEquiped}`).val()}`] += +((+items[itemEquiped].As ) * (+items["As Ratio"]) || 0);
+            let newCh = champs[champEquiped]["Crit Chance"] += +items[itemEquiped]["Crit Chance"] || 0;
+            let newCd = champs[champEquiped]["Crit Damage"] += +items[itemEquiped]["Crit Damage"] || 0;
+            
+         
+            $(`.Ap${champEquiped}`)[0].innerHTML = `Ap ${newAp}`;
+            $(`.Ad${champEquiped}`)[0].innerHTML = `Ad ${(newAd.toFixed(0))}`;
+            $(`.As${champEquiped}`)[0].innerHTML = `As ${newAs}`;
+            $(`.Ch${champEquiped}`)[0].innerHTML = `Ch ${newCh}`;
+            $(`.Cd${champEquiped}`)[0].innerHTML = `Cd ${newCd}`;
         }
        
     }
-    }
+}
 
 //старт всей программы
 let start = document.querySelector(".Start");
 let clear = document.querySelector(".Clear");
 let clearField = document.querySelector(".ClearField");
+
 
 start.addEventListener("click",Start,{once:true})
 clear.addEventListener("click",Clear,{once:true})
@@ -171,18 +190,52 @@ clearField.addEventListener("click",ClearField);
 
 function Start(){       //все работает. не трогать
     if (Array.from(field.children).length == 0) {
-    alert ("Чемпионы не выбраны!")
+    alert ("Чемпионы не выбраны!");
+    start.addEventListener("click",Start,{once:true});
     return;}
-
+    $(".log1").hide();
+    $(".items_in").hide();
+    $(".champ_intro").hide();
+    $(".baronFight").removeClass("hide");
     calcStats();
     BaronHpCheck(); // слежение за хп баром
     Damage(); // урон
     BaronHpReg(); // исцеление
-    clear.addEventListener("click",Clear,{once:true})
+    autoSmite();
+    clear.addEventListener("click",Clear,{once:true});
+    document.addEventListener("keydown",Smite,{once:true});
     
 }
 
 function Clear(){       //все работает. не трогать
+    let champTables = document.querySelectorAll(".table td");
+    $(".log1").show();
+    $(".items_in").show();
+    $(".champ_intro").show();
+    $(".baronFight").addClass("hide");
+    for (let childs of champTables ){
+        for (let itemsOnChamp of childs.childNodes){//название переменной изменить
+            let itemEquiped = itemsOnChamp.getAttribute("name");//название переменной изменить
+            let champEquiped = childs.parentNode.parentNode.parentNode.getAttribute("data-champName");
+            //console.log(itemEquiped);
+            console.log(champEquiped);
+                      
+
+            let newAd = champs[champEquiped][`Ad lvl ${$(`.lvl${champEquiped}`).val()}`] -= +items[itemEquiped].Ad || 0;
+            let newAp = champs[champEquiped].Ap -= +items[itemEquiped].Ap || 0;
+            let newAs = champs[champEquiped][`As lvl ${$(`.lvl${champEquiped}`).val()}`] -= +((+items[itemEquiped].As) * (+items["As Ratio"]))||0;
+            let newCh = champs[champEquiped]["Crit Chance"] -= +items[itemEquiped]["Crit Chance"] || 0;
+            let newCd = champs[champEquiped]["Crit Damage"] -= +items[itemEquiped]["Crit Damage"] || 0;
+            
+         
+            $(`.Ap${champEquiped}`)[0].innerHTML = `Ap ${newAp}`;
+            $(`.Ad${champEquiped}`)[0].innerHTML = `Ad ${(newAd.toFixed(0))}`;
+            $(`.As${champEquiped}`)[0].innerHTML = `As ${newAs}`;
+            $(`.Ch${champEquiped}`)[0].innerHTML = `Ch ${newCh}`;
+            $(`.Cd${champEquiped}`)[0].innerHTML = `Cd ${newCd}`;
+        }
+       
+    }
     BaronHpCurrent = BaronHpMax;
     span.innerHTML = `${BaronHpCurrent}`; 
     document.getElementById(`perc_in`).style.width=100+"%";
@@ -192,19 +245,25 @@ function Clear(){       //все работает. не трогать
 
 function ClearField(){      //все работает. не трогать
     
-    let name2= document.querySelectorAll(".ChampImg")
-    Array.from(buttons).forEach(function(btn) {
-        let result = btn.hasAttribute(`listener`);
-        
-        if (result)return;
-        for (let elem of name2)
-        {elem.setAttribute(`listener`,`1`);
-        elem.addEventListener("click", SelectChamp,{once:true});
-        elem.addEventListener("click", ShowChamp,{once:true});
-        }
-        }); 
-    field.innerHTML = "";
-    return;
+    location.reload();
+ 
 }
 
+let observer = new MutationObserver(()=>$(".logZone > p").last()[0].scrollIntoView(false))
+observer.observe(logZone,{
+    childList : true
+});
 
+
+function Smite(e) {
+    if(e.keyCode == 70){
+        
+    if (BaronHpCurrent <= 900){
+        BaronHpCurrent -= 900;
+        alert ("Вы засмайтили!")
+    }
+    else {
+        BaronHpCurrent -= 900;
+        alert (`Лох! У нашора осталось еще ${BaronHpCurrent} здоровья!`)
+    }}   
+return BaronHpCurrent;}

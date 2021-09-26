@@ -13,7 +13,7 @@ setInterval(function() {
     
     return false;
   };
-}},1000);
+}},500);
   
      function refreshItem(event){
       let test = event.target;
@@ -100,6 +100,7 @@ setInterval(function() {
       let x = event.clientX;
       let y = event.clientY;
       let elem = document.elementFromPoint(x,y);
+      if (elem.tagName != "IMG") return;
       elem.remove();
     }
 
