@@ -13,7 +13,7 @@ setInterval(function() {
     
     return false;
   };
-}},500);
+}},300);
   
      function refreshItem(event){
       let test = event.target;

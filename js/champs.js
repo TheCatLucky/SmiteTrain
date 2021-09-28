@@ -22,12 +22,12 @@ window.champions =
                 if (chance < ch) {
                     DamageTest = ((ad * ( 1 + cd)).toFixed(0))* 0.5;
                     BaronHpCurrent -= DamageTest ;
-                    logZone.insertAdjacentHTML("beforeend", `<p>Ари нанесла ${DamageTest} крит урона</p>`);
+                    logZone.insertAdjacentHTML("beforeend", `<p>Ари нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
                     return BaronHpCurrent;}
 
                 else {DamageTest = ad * 0.5;
                 BaronHpCurrent -= DamageTest ;
-                logZone.insertAdjacentHTML("beforeend",`<p>Ари нанесла ${DamageTest} урона</p>`);
+                logZone.insertAdjacentHTML("beforeend",`<p>Ари нанесла ${DamageTest.toFixed(0)} урона</p>`);
                 return BaronHpCurrent};
             },Math.random() * (1000)) 
         },
@@ -55,12 +55,12 @@ window.champions =
                 if (chance < ch) {
                     DamageTest = (ad * ( 1 + cd)).toFixed(0)* 0.5;
                     BaronHpCurrent -= DamageTest ;
-                    logZone.insertAdjacentHTML("beforeend", `<p>Диана нанесла ${DamageTest} крит урона</p>`);
+                    logZone.insertAdjacentHTML("beforeend", `<p>Диана нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
                     return BaronHpCurrent;}
 
                 else {DamageTest = ad* 0.5;
                 BaronHpCurrent -= DamageTest ;
-                logZone.insertAdjacentHTML("beforeend",`<p>Диана нанесла ${DamageTest} урона</p>`);
+                logZone.insertAdjacentHTML("beforeend",`<p>Диана нанесла ${DamageTest.toFixed(0)} урона</p>`);
                 return BaronHpCurrent};
             },Math.random() * (1000)) 
         },
@@ -85,12 +85,12 @@ window.champions =
                 if (chance < ch) {
                     DamageTest = (ad * ( 1 + cd)).toFixed(0)* 0.5;
                     BaronHpCurrent -= DamageTest ;
-                    logZone.insertAdjacentHTML("beforeend", `<p>Кейтлин нанесла ${DamageTest} крит урона</p>`);
+                    logZone.insertAdjacentHTML("beforeend", `<p>Кейтлин нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
                     return BaronHpCurrent;}
 
                 else {DamageTest = ad* 0.5;
                 BaronHpCurrent -= DamageTest ;
-                logZone.insertAdjacentHTML("beforeend", `<p>Кейтлин нанесла ${DamageTest}  урона</p>`);
+                logZone.insertAdjacentHTML("beforeend", `<p>Кейтлин нанесла ${DamageTest.toFixed(0)}  урона</p>`);
                 return BaronHpCurrent;}
             },Math.random() * (1000)) 
         },
@@ -116,12 +116,12 @@ window.champions =
                 if (chance < ch) {
                     DamageTest = (ad * ( 1 + cd)).toFixed(0) * 0.5;
                     BaronHpCurrent -= DamageTest ;
-                    logZone.insertAdjacentHTML("beforeend", `<p>Кассиопея нанесла ${DamageTest} крит урона</p>`);
+                    logZone.insertAdjacentHTML("beforeend", `<p>Кассиопея нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
                     return BaronHpCurrent;}
 
                 else {DamageTest = ad * 0.5;
                 BaronHpCurrent -= DamageTest ;
-                logZone.insertAdjacentHTML("beforeend", `<p>Кассиопея нанесла ${DamageTest}  урона</p>`);
+                logZone.insertAdjacentHTML("beforeend", `<p>Кассиопея нанесла ${DamageTest.toFixed(0)}  урона</p>`);
                 return BaronHpCurrent;}
             },Math.random() * (1000)) 
         },
@@ -147,12 +147,12 @@ window.champions =
                 if (chance < ch) {
                     DamageTest = (ad * ( 1 + cd)).toFixed(0) * 0.5;
                     BaronHpCurrent -= DamageTest ;
-                    logZone.insertAdjacentHTML("beforeend", `<p>Твистед Фейт нанесла ${DamageTest} крит урона</p>`);
+                    logZone.insertAdjacentHTML("beforeend", `<p>Твистед Фейт нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
                     return BaronHpCurrent;}
 
                 else {DamageTest = ad * 0.5;
                 BaronHpCurrent -= DamageTest ;
-                logZone.insertAdjacentHTML("beforeend", `<p>Твистед Фейт нанесла ${DamageTest}  урона</p>`);
+                logZone.insertAdjacentHTML("beforeend", `<p>Твистед Фейт нанесла ${DamageTest.toFixed(0)}  урона</p>`);
                 return BaronHpCurrent;}
             },Math.random() * (1000)) 
         },
@@ -178,12 +178,12 @@ window.champions =
                 if (chance < ch) {
                     DamageTest = (ad * ( 1 + cd)).toFixed(0) * 0.5;
                     BaronHpCurrent -= DamageTest;
-                    logZone.insertAdjacentHTML("beforeend", `<p>Зиггс нанес ${DamageTest} крит урона</p>`);
+                    logZone.insertAdjacentHTML("beforeend", `<p>Зиггс нанес ${DamageTest.toFixed(0)} крит урона</p>`);
                     return BaronHpCurrent;}
 
                 else {DamageTest = ad* 0.5;
                 BaronHpCurrent -= DamageTest ;
-                logZone.insertAdjacentHTML("beforeend", `<p>Зиггс нанес ${DamageTest}  урона</p>`);
+                logZone.insertAdjacentHTML("beforeend", `<p>Зиггс нанес ${DamageTest.toFixed(0)}  урона</p>`);
                 return BaronHpCurrent;}
             },Math.random() * (1000)) 
         },

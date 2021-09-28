@@ -10,16 +10,28 @@ let img = document.querySelector('img');
 let logZone = document.querySelector('.logZone');
 
 //барон
-let BaronHpMax = 2000;
-let BaronHpRegen = 15;
-let BaronHpCurrent = BaronHpMax;
 
 Array.from(buttons).forEach(function(btn) {
     btn.setAttribute(`listener`,`1`);
     btn.addEventListener("click", SelectChamp,{once:true});
     btn.addEventListener("click", ShowChamp,{once:true});
     });
+$(".ingameMinute").on("input",function (){
+    if ($(".ingameMinute").val() > 99){
+        $(".ingameMinute").val("99");
+    }
+});
+$(".ingameMinute").on("blur",function (){
+    if ($(".ingameMinute").val() < 20){
+        $(".ingameMinute").val("20");
+    }
+});
+$(".BaronNashor").hide();
+$(".baronFight").hide();
 
+let BaronHpCurrent;
+let BaronHpMax;
+let BaronHpRegen;
 function SelectChamp(){
     let target = event.target;
     if (target.tagName != 'IMG') return;
@@ -67,10 +79,6 @@ function SelectChamp(){
             $(`.lvl${name}`).val("18");
         }
     });
-    
-    
-    //console.log(BaronHpCurrent);
-   
 }
 function RemoveChamp(){
     let target = event.target;
@@ -108,7 +116,18 @@ function Damage() {
     return BaronHpCurrent;
 
 }
-
+function calcBaronHpReg(){
+    let minuteScale = $(".ingameMinute").val();
+    BaronHpRegen = 15 + minuteScale * 0.375;
+    console.log(BaronHpRegen);
+    return BaronHpRegen;
+}
+function calcBaronMaxHp(){
+    let minuteScale = $(".ingameMinute").val();
+    BaronHpMax = 9000 + 180 * minuteScale;
+    console.log(`Baron Max Hp = ${BaronHpMax}`);
+    return (BaronHpCurrent = BaronHpMax);
+}
 function BaronHpReg(){  //все работает. не трогать. остается только добавить скейл за минуту
     let heal = setTimeout ( function BaronHeal() { // пассивное исцеление
         heal = setTimeout (BaronHeal,5000);
@@ -116,10 +135,11 @@ function BaronHpReg(){  //все работает. не трогать. оста
         clearTimeout(heal);
         return ;};
     if (BaronHpCurrent < BaronHpMax){
-    BaronHpCurrent += BaronHpRegen;  
+    BaronHpCurrent += BaronHpRegen; 
+    console.log(BaronHpRegen);
     span.innerHTML = `${BaronHpCurrent.toFixed(0)}`;
 
-    if (BaronHpCurrent >= 9000) {span.innerHTML = `9000`};  
+    if (BaronHpCurrent >= BaronHpMax) {span.innerHTML = `9000`};  
     
     return BaronHpCurrent}
     },0)
@@ -156,10 +176,7 @@ function calcStats(){
         for (let itemsOnChamp of childs.childNodes){//название переменной изменить
             let itemEquiped = itemsOnChamp.getAttribute("name");//название переменной изменить
             let champEquiped = childs.parentNode.parentNode.parentNode.getAttribute("data-champName");
-            //console.log(itemEquiped);
-            console.log(champEquiped);
                       
-
             let newAd = champs[champEquiped][`Ad lvl ${$(`.lvl${champEquiped}`).val()}`] += +items[itemEquiped].Ad || 0;
             let newAp = champs[champEquiped].Ap += +items[itemEquiped].Ap || 0;
             let newAs = champs[champEquiped][`As lvl ${$(`.lvl${champEquiped}`).val()}`] += +((+items[itemEquiped].As ) * (+items["As Ratio"]) || 0);
@@ -196,15 +213,18 @@ function Start(){       //все работает. не трогать
     $(".log1").hide();
     $(".items_in").hide();
     $(".champ_intro").hide();
-    $(".baronFight").removeClass("hide");
-    calcStats();
+    $(".baronFight").show();
+    $(".BaronNashor").show();
+    calcBaronHpReg();//расчет хп регена
+    calcBaronMaxHp();//расчет максимального хп
+    calcStats();//статистики персонажей
     BaronHpCheck(); // слежение за хп баром
     Damage(); // урон
     BaronHpReg(); // исцеление
     autoSmite();
     clear.addEventListener("click",Clear,{once:true});
     document.addEventListener("keydown",Smite,{once:true});
-    
+    return BaronHpCurrent;    
 }
 
 function Clear(){       //все работает. не трогать
@@ -217,9 +237,6 @@ function Clear(){       //все работает. не трогать
         for (let itemsOnChamp of childs.childNodes){//название переменной изменить
             let itemEquiped = itemsOnChamp.getAttribute("name");//название переменной изменить
             let champEquiped = childs.parentNode.parentNode.parentNode.getAttribute("data-champName");
-            //console.log(itemEquiped);
-            console.log(champEquiped);
-                      
 
             let newAd = champs[champEquiped][`Ad lvl ${$(`.lvl${champEquiped}`).val()}`] -= +items[itemEquiped].Ad || 0;
             let newAp = champs[champEquiped].Ap -= +items[itemEquiped].Ap || 0;
@@ -236,6 +253,7 @@ function Clear(){       //все работает. не трогать
         }
        
     }
+    $(".logZone > p").remove();
     BaronHpCurrent = BaronHpMax;
     span.innerHTML = `${BaronHpCurrent}`; 
     document.getElementById(`perc_in`).style.width=100+"%";
@@ -266,4 +284,5 @@ function Smite(e) {
         BaronHpCurrent -= 900;
         alert (`Лох! У нашора осталось еще ${BaronHpCurrent} здоровья!`)
     }}   
-return BaronHpCurrent;}
+return BaronHpCurrent;
+}
