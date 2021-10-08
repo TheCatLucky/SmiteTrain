@@ -4,7 +4,7 @@ const items = window.items;
 //основные HTML поля
 let span = $("#Hp");
 let field = $("#champions_field");
-let buttons = $(".ChampImg");// поле выбора персов
+let buttons = $(".ChampImg");
 let img = $('img');
 let logZone = $("#logZone");
 let start = $("#Start");
@@ -72,7 +72,7 @@ function selectChamp() {
     </tr>
   </table>`;
   Array.from(field.children()).forEach(function(pict){
-    pict.addEventListener("click",removeChamp,{once:true})
+    pict.addEventListener("click",removeChamp)
   });
   $(`.lvl${name}`).on("input",function (){
     if ($(`.lvl${name}`).val() > 18){
@@ -83,14 +83,15 @@ function selectChamp() {
 
 function removeChamp() {
   let target = event.target;
+  if (target.tagName != 'IMG') {
+    return;
+  }
+
   let name = target.id;
   let ChampName = name.substring(0, name.length -6);
   let name2= $(`#${ChampName}`);
   let targetRemove = $(`#${name}`).closest(".droppable");
 
-  if (target.tagName != 'IMG') {
-    return;
-  }
   targetRemove.remove();
   Array.from(buttons).forEach(function(btn) {
     let result = btn.hasAttribute(`listener`);
