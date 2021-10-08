@@ -15,9 +15,9 @@ let BaronHpCurrent;
 let BaronHpMax;
 let BaronHpRegen;
 
-start.addEventListener("click",start,{once:true})
-clear.addEventListener("click",clear,{once:true})
-clearField.addEventListener("click",clearField);
+start.addEventListener("click",startGmae,{once:true})
+clear.addEventListener("click",clearFight,{once:true})
+clearField.addEventListener("click",clearInGameZone);
 
 Array.from(buttons).forEach(function(btn) {
   btn.setAttribute(`listener`,`1`);
@@ -214,12 +214,13 @@ function calcStats() {
   }
 }
 
-function clear() {       //все работает. не трогать
+function clearFight() {       //все работает. не трогать
   let champTables = document.querySelectorAll(".table td");
   $(".log1").show();
   $(".items_in").show();
   $(".champ_intro").show();
-  $(".baronFight").addClass("hide");
+  $(".BaronNashor").hide();
+  $(".baronFight").hide();
   for (let childs of champTables ){
     for (let itemsOnChamp of childs.childNodes){//название переменной изменить
       let itemEquiped = itemsOnChamp.getAttribute("name");//название переменной изменить
@@ -241,11 +242,11 @@ function clear() {       //все работает. не трогать
   BaronHpCurrent = BaronHpMax;
   span.innerHTML = `${BaronHpCurrent}`;
   document.getElementById(`perc_in`).style.width=100+"%";
-  start.addEventListener("click",start,{once:true})
+  start.addEventListener("click",startGmae,{once:true})
   return BaronHpCurrent;
 }
 
-function clearField() {      //все работает. не трогать
+function clearInGameZone() {      //все работает. не трогать
   location.reload();
 }
 
@@ -254,10 +255,10 @@ observer.observe(logZone,{
   childList : true
 });
 
-function start() {       //все работает. не трогать
+function startGmae() {       //все работает. не трогать
   if (Array.from(field.children).length == 0) {
   alert ("Чемпионы не выбраны!");
-  start.addEventListener("click",start,{once:true});
+  start.addEventListener("click",startGmae,{once:true});
   return;}
   $(".log1").hide();
   $(".items_in").hide();
@@ -271,7 +272,7 @@ function start() {       //все работает. не трогать
   damage(); // урон
   baronHpReg(); // исцеление
   autoSmite();
-  clear.addEventListener("click",clear,{once:true});
+  clear.addEventListener("click",clearFight,{once:true});
   document.addEventListener("keydown",smite,{once:true});
   return BaronHpCurrent;
 }
