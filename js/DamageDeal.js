@@ -2,6 +2,7 @@
 const champs = window.champions;
 const items = window.items;
 //основные HTML поля
+JQse
 let span = document.querySelector('#Hp');
 let field = document.getElementById(`champions_field`);
 let champList = document.getElementById(`champions_list`);
@@ -22,7 +23,7 @@ clearField.addEventListener("click",clearField);
 Array.from(buttons).forEach(function(btn) {
   btn.setAttribute(`listener`,`1`);
   btn.addEventListener("click", selectChamp,{once:true});
-  });
+});
 $(".ingameMinute").on("input",function () {
   if ($(".ingameMinute").val() > 99){
     $(".ingameMinute").val("99");
@@ -158,11 +159,11 @@ function autoSmite() {
       BaronHpCurrent -=900;
       clearTimeout(smite);
       return BaronHpCurrent;}
-    },0)
+  },0)
 }
 
-function smite(e) {
-  if(e.keyCode == 70){
+function smite(smiteKey) {
+  if(smiteKey.keyCode == 70){
     if (BaronHpCurrent <= 900){
       BaronHpCurrent -= 900;
       alert ("Вы засмайтили!")

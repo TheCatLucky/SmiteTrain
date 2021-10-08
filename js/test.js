@@ -22,7 +22,7 @@ clearField.addEventListener("click",clearField);
 Array.from(buttons).forEach(function(btn) {
   btn.setAttribute(`listener`,`1`);
   btn.addEventListener("click", selectChamp,{once:true});
-  });
+});
 $(".ingameMinute").on("input",function () {
   if ($(".ingameMinute").val() > 99){
     $(".ingameMinute").val("99");
