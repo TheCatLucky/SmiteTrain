@@ -125,7 +125,8 @@ function calcBaronHpReg() {
 function calcBaronMaxHp() {
   let minuteScale = $(".ingameMinute").val();
   
-  BaronHpMax = 9000 + 180 * minuteScale;
+  //BaronHpMax = 9000 + 180 * minuteScale;
+  BaronHpMax = 1500;
   console.log(`Baron Max Hp = ${BaronHpMax}`);
   return (BaronHpCurrent = BaronHpMax);
 }
@@ -139,7 +140,6 @@ function baronHpReg() {  //все работает
     }
     if (BaronHpCurrent < BaronHpMax){
       BaronHpCurrent += BaronHpRegen; 
-      console.log(BaronHpRegen);
       span.html(`${BaronHpCurrent.toFixed(0)}`);
       if (BaronHpCurrent >= BaronHpMax) {
         span.html(`9000`);
@@ -177,12 +177,10 @@ function smite(smiteKey) {
 
 function checkBaronHp () {                               //все работает. не трогать
   let HpBar = $("#perc_in");
-  console.log(HpBar);
-  let HpBarPercent = BaronHpMax / 100;
-  let CurrentHpBarPercent = (BaronHpCurrent / HpBarPercent);
-
   let checkBaronHp = setTimeout( function checkBaronHpRecursion(){
     checkBaronHp = setTimeout(checkBaronHpRecursion,100); 
+    let HpBarPercent = BaronHpMax / 100;
+    let CurrentHpBarPercent = BaronHpCurrent / HpBarPercent;
     if (BaronHpCurrent <= 0) {
     span.html("0");
     HpBar.css({"width" : "0%"});
