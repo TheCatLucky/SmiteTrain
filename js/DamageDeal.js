@@ -2,23 +2,21 @@
 const champs = window.champions;
 const items = window.items;
 //основные HTML поля
-JQse
-let span = document.querySelector('#Hp');
-let field = document.getElementById(`champions_field`);
-let champList = document.getElementById(`champions_list`);
-let buttons = document.querySelectorAll('.ChampImg');// поле выбора персов
-let img = document.querySelector('img');
-let logZone = document.querySelector('.logZone');
-let start = document.querySelector(".Start");
-let clear = document.querySelector(".Clear");
-let clearField = document.querySelector(".ClearField");
+let span = $("#Hp");
+let field = $("#champions_field");
+let buttons = $(".ChampImg");
+let img = $('img');
+let logZone = $("#logZone");
+let start = $("#Start");
+let clear = $("#Clear");
+let clearField = $("#ClearField");
 let BaronHpCurrent;
 let BaronHpMax;
 let BaronHpRegen;
 
-start.addEventListener("click",start,{once:true})
-clear.addEventListener("click",clear,{once:true})
-clearField.addEventListener("click",clearField);
+start.one("click",startGame)
+clear.one("click",clearFight)
+clearField.on("click",clearInGameZone);
 
 Array.from(buttons).forEach(function(btn) {
   btn.setAttribute(`listener`,`1`);
@@ -44,14 +42,15 @@ function selectChamp() {
   let div = document.createElement('div');
 
   if (target.tagName != 'IMG') return;
-  if (field.children.length == 5) {
+  if (field.children().length == 5) {
     target.addEventListener("click", selectChamp,{once:true})
     return ;} // если выбраны персы и был нажат клик, то вновь дается событие
   target.removeAttribute(`listener`);
-
+   
   field.append(div);
   div.className = `droppable ${name}`;
-  div.innerHTML = `<div class = "MenuChamp"><button  class="ChampButton" ">${picture}</button>
+  div.innerHTML = `<div class = "MenuChamp">
+  <button  class="ChampButton" ">${picture}</button>
   <input type="number" max="18" value="1" class="lvl lvl${name}""></div>
   <div class = " Stats${name} Stats">
     <p class="Ap${name}">Ap ${champs[name]["Ap"]}</p>
@@ -72,9 +71,8 @@ function selectChamp() {
       <td></td>
     </tr>
   </table>`;
-  
-  Array.from(field.children).forEach(function(pict){
-    pict.addEventListener("click",removeChamp,{once:true})
+  Array.from(field.children()).forEach(function(pict){
+    pict.addEventListener("click",removeChamp)
   });
   $(`.lvl${name}`).on("input",function (){
     if ($(`.lvl${name}`).val() > 18){
@@ -85,14 +83,15 @@ function selectChamp() {
 
 function removeChamp() {
   let target = event.target;
-  let name = target.id;
-  let ChampName = name.substring(0, name.length -6);
-  let name2= document.getElementById(`${ChampName}`);
-  let targetRemove = document.getElementById(`${name}`).parentNode.parentNode.parentNode;
-
   if (target.tagName != 'IMG') {
     return;
   }
+
+  let name = target.id;
+  let ChampName = name.substring(0, name.length -6);
+  let name2= $(`#${ChampName}`);
+  let targetRemove = $(`#${name}`).closest(".droppable");
+
   targetRemove.remove();
   Array.from(buttons).forEach(function(btn) {
     let result = btn.hasAttribute(`listener`);
@@ -100,18 +99,18 @@ function removeChamp() {
     if (result){
       return;
     }
-    name2.setAttribute(`listener`,`1`);
-    name2.addEventListener("click", selectChamp,{once:true});
+    name2.attr("listener","1");
+    name2.one("click", selectChamp);
     }); 
     console.log(ChampName);
   damage -= champs[ChampName]["Ad lvl 1"];   
 }
 
 function damage() {
-  let zone = field.querySelectorAll("img.ChampSelected");
-
+  let zone = $("img.ChampSelected");
+  
   Array.from(zone).forEach(img => champs[img.alt].HandDamage(champs[img.alt][`Ad lvl ${$(`.lvl${img.alt}`).val()}`],champs[img.alt][`As lvl ${$(`.lvl${img.alt}`).val()}`],champs[img.alt]["Crit Chance"],champs[img.alt]["Crit Damage"]));
-  span.innerHTML = `${BaronHpCurrent.toFixed(0)}`;
+  span.html(`${BaronHpCurrent.toFixed(0)}`);
   return BaronHpCurrent;
 }
 
@@ -141,10 +140,10 @@ function baronHpReg() {  //все работает
     if (BaronHpCurrent < BaronHpMax){
       BaronHpCurrent += BaronHpRegen; 
       console.log(BaronHpRegen);
-      span.innerHTML = `${BaronHpCurrent.toFixed(0)}`;
+      span.html(`${BaronHpCurrent.toFixed(0)}`);
       if (BaronHpCurrent >= BaronHpMax) {
-        span.innerHTML = `9000`
-      };
+        span.html(`9000`);
+      }
       return BaronHpCurrent;
     }
   },0)
@@ -177,20 +176,21 @@ function smite(smiteKey) {
 }
 
 function checkBaronHp () {                               //все работает. не трогать
-  let HpBar = document.getElementById(`perc_in`);
+  let HpBar = $("#perc_in");
+  console.log(HpBar);
   let HpBarPercent = BaronHpMax / 100;
   let CurrentHpBarPercent = (BaronHpCurrent / HpBarPercent);
 
   let checkBaronHp = setTimeout( function checkBaronHpRecursion(){
     checkBaronHp = setTimeout(checkBaronHpRecursion,100); 
     if (BaronHpCurrent <= 0) {
-    span.innerHTML = "0";
-    document.getElementById(`perc_in`).style.width=0+"%";
+    span.html("0");
+    HpBar.css({"width" : "0%"});
     clearTimeout(checkBaronHp);
     return ;
     }
-    span.innerHTML = `${BaronHpCurrent.toFixed(0)}`;
-    HpBar.style.width=CurrentHpBarPercent+"%"; 
+    span.html(`${BaronHpCurrent.toFixed(0)}`);
+    HpBar.css({"width" : `${CurrentHpBarPercent}%`}); 
 },0)
 }
 
@@ -215,12 +215,13 @@ function calcStats() {
   }
 }
 
-function clear() {       //все работает. не трогать
+function clearFight() {       //все работает. не трогать
   let champTables = document.querySelectorAll(".table td");
   $(".log1").show();
   $(".items_in").show();
   $(".champ_intro").show();
-  $(".baronFight").addClass("hide");
+  $(".BaronNashor").hide();
+  $(".baronFight").hide();
   for (let childs of champTables ){
     for (let itemsOnChamp of childs.childNodes){//название переменной изменить
       let itemEquiped = itemsOnChamp.getAttribute("name");//название переменной изменить
@@ -240,25 +241,22 @@ function clear() {       //все работает. не трогать
   }
   $(".logZone > p").remove();
   BaronHpCurrent = BaronHpMax;
-  span.innerHTML = `${BaronHpCurrent}`;
+  span.html(`${BaronHpCurrent}`);
   document.getElementById(`perc_in`).style.width=100+"%";
-  start.addEventListener("click",start,{once:true})
+  start.one("click",startGame)
   return BaronHpCurrent;
 }
 
-function clearField() {      //все работает. не трогать
+function clearInGameZone() {      //все работает. не трогать
   location.reload();
 }
 
-let observer = new MutationObserver(()=>$(".logZone > p").last()[0].scrollIntoView(false))
-observer.observe(logZone,{
-  childList : true
-});
+logZone.on('DOMSubtreeModified', function(){$(".logZone > p").last()[0].scrollIntoView(false)});
 
-function start() {       //все работает. не трогать
-  if (Array.from(field.children).length == 0) {
+function startGame() {       //все работает. не трогать
+  if (Array.from(field.children()).length == 0) {
   alert ("Чемпионы не выбраны!");
-  start.addEventListener("click",start,{once:true});
+  start.one("click",startGame);
   return;}
   $(".log1").hide();
   $(".items_in").hide();
@@ -272,7 +270,7 @@ function start() {       //все работает. не трогать
   damage(); // урон
   baronHpReg(); // исцеление
   autoSmite();
-  clear.addEventListener("click",clear,{once:true});
+  clear.one("click",clearFight);
   document.addEventListener("keydown",smite,{once:true});
   return BaronHpCurrent;
 }
