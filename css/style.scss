@@ -1,0 +1,270 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-size: 20px;
+}
+
+$intro-color : #2d3e43;
+@mixin button{
+  button{
+  margin: 5px;
+  padding: 0;
+  border: none;
+  height: 50px;
+  width: 50px;
+  }
+}
+
+.intro{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: $intro-color;
+  text-align:center;
+  font-size:200px;
+  color: orange;
+  text-shadow:
+    1px 1px 0px rgb(255, 72, 0),
+    2px 2px 0px rgb(255, 72, 0),
+    3px 3px 0px rgb(255, 72, 0),
+    4px 4px 0px rgb(255, 72, 0),
+    5px 5px 0px rgb(255, 72, 0),
+    6px 6px 0px rgb(255, 72, 0),
+    7px 7px 0px rgb(255, 72, 0),
+    8px 8px 0px rgb(255, 72, 0),
+    9px 9px 0px rgb(255, 72, 0),
+    10px 10px 0px rgb(255, 72, 0),
+    20px 15px 25px black;
+
+    .intro__choose{
+      display: flex;
+      flex-direction: row;
+      padding-left: 250px;
+      margin-top: 25px;
+    
+      h1{
+        padding-right: 50px; 
+        margin-right: 200px;
+        font-size: 250px;
+      }
+      h1:hover{
+        font-size: 300px;
+      }
+    }
+}
+.buttons{
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.ChampButton:hover{
+  box-shadow: 0px 0px 0px 10px red;;
+}
+
+.BaronNashor{
+  display: flex;
+  flex-direction: column;
+
+  .BaronNashorHpText{
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  #Hp{
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 2rem;
+  }
+
+  .hpBar{
+    display: flex;
+    justify-content: center;
+
+    #perc {
+      width:667px;
+      border:1px solid blue;
+      padding:0px;
+
+      #perc_in {
+        height: 30px;
+        width:100%;
+        background:red;
+      }
+    }
+  }
+}
+
+.ingameMinuteZone{
+  position: absolute;
+  right: 2rem;
+  top:2rem;
+  padding-right: 0.5rem;
+
+  span{
+    padding-right: 0.5rem;
+    font-size: 1.5rem; 
+  }
+
+  .ingameMinute{
+    height: 40px;
+    width: 60px;
+    font-size: 1.5rem;
+  }
+}
+
+.champ_intro{
+  text-align: center;
+  font-size: 2rem;
+}
+.logZone{
+  float: right;
+  height: 200px;
+  width: 30%;
+  background-color: yellowgreen;
+  overflow: auto;
+
+  p{
+    padding-top: 5px;
+  }
+}
+
+#champions_list, .items_list{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  @include button
+}
+#champions_field{
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+
+  .droppable {
+    height: 110px;
+    width: 275px;
+    background-color: indianred;
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @include button;
+
+    .MenuChamp{
+      display: flex;
+      flex-direction: column;
+
+      .lvl{
+        background-color: tomato;
+        margin: 5px 0px 0px 5px;
+        height: 40px;
+        width: 50px;
+        font-size: 1.5rem;
+      }
+    }
+
+    .Stats{
+      padding-top: 5px;
+      display: flex;
+      flex-direction: column;
+
+      p {
+        font-size: 0.8rem;
+      }
+    }
+
+    .table{
+      margin:10px 5px 10px 0px;
+      position: relative;
+      border: 1px solid; 
+      padding: 0; 
+
+      td {
+        border: 1px solid;
+        width: 42px;
+        height: 42px;
+
+        img {
+          display: block;
+          width: 40px;
+          height: 40px;
+          margin: auto;
+          padding: 0px;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+}
+
+.champs_in {
+  position: relative;
+  left: 0px;
+  width: 500px;
+  height: 200px;
+  background: hsla(207, 44%, 49%, 0.4);
+  margin-top: 5px;
+  transition: left .7s linear;
+
+  #ChampArrow{
+    position: relative;
+    float: right;
+    top: 85px;;
+  }
+}
+
+.champs_out {
+  position: relative;
+  left: -440px;
+  width: 500px;
+  height: 200px;
+  background:hsla(207, 44%, 49%, 0.4);
+  margin-top: 5px;
+  transition: left .7s linear;
+}
+
+.items_in {
+  position: relative;
+  left: 0px;
+  width: 500px;
+  height: 200px;
+  background: hsla(207, 44%, 49%, 0.4);
+  transition: left .7s linear;
+
+  #ItemArrow{
+    position: relative;
+    float: right;
+    top: 85px;;
+  }
+}
+
+.items_out {
+  position: relative;
+  left: -440px;
+  width: 500px;
+  height: 200px;
+  background:hsla(207, 44%, 49%, 0.4);
+  transition: left .7s linear;
+
+  #ItemArrow{
+    position: relative;
+    float: right;
+    top: 85px;;
+  }
+}
+
+.baronFight{
+  display: flex;
+  justify-content: center;
+  padding-right: 100px;
+  background-color: rgb(99, 201, 204);
+}

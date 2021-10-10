@@ -10,6 +10,7 @@ let logZone = $("#logZone");
 let start = $("#Start");
 let clear = $("#Clear");
 let clearField = $("#ClearField");
+let smiteKey;
 let BaronHpCurrent;
 let BaronHpMax;
 let BaronHpRegen;
@@ -22,18 +23,35 @@ Array.from(buttons).forEach(function(btn) {
   btn.setAttribute(`listener`,`1`);
   btn.addEventListener("click", selectChamp,{once:true});
 });
+
 $(".ingameMinute").on("input",function () {
   if ($(".ingameMinute").val() > 99){
     $(".ingameMinute").val("99");
   }
 });
+
 $(".ingameMinute").on("blur",function () {
   if ($(".ingameMinute").val() < 20){
     $(".ingameMinute").val("20");
   }
 });
+
+$(".intro__choose>h1").one("click", function () {
+  if ($(this).text() == "D"){
+    smiteKey = 68;
+    console.log(smiteKey);
+    $(".intro").fadeToggle(500);
+  }
+  if ($(this).text() == "F"){
+    smiteKey = 70;
+    console.log(smiteKey);
+    $(".intro").fadeToggle(500);
+  }
+});
+
 $(".BaronNashor").hide();
 $(".baronFight").hide();
+$(".logZone").hide();
 
 function selectChamp() {
   let target = event.target;
@@ -125,8 +143,7 @@ function calcBaronHpReg() {
 function calcBaronMaxHp() {
   let minuteScale = $(".ingameMinute").val();
   
-  //BaronHpMax = 9000 + 180 * minuteScale;
-  BaronHpMax = 1500;
+  BaronHpMax = 9000 + 180 * minuteScale;
   console.log(`Baron Max Hp = ${BaronHpMax}`);
   return (BaronHpCurrent = BaronHpMax);
 }
@@ -161,8 +178,8 @@ function autoSmite() {
   },0)
 }
 
-function smite(smiteKey) {
-  if(smiteKey.keyCode == 70){
+function smite(keydown) {
+  if(keydown.keyCode == smiteKey){
     if (BaronHpCurrent <= 900){
       BaronHpCurrent -= 900;
       alert ("Вы засмайтили!")
@@ -200,13 +217,15 @@ function calcStats() {
       let champEquiped = childs.parentNode.parentNode.parentNode.getAttribute("data-champName");
       let newAd = champs[champEquiped][`Ad lvl ${$(`.lvl${champEquiped}`).val()}`] += +items[itemEquiped].Ad || 0;
       let newAp = champs[champEquiped].Ap += +items[itemEquiped].Ap || 0;
-      let newAs = champs[champEquiped][`As lvl ${$(`.lvl${champEquiped}`).val()}`] += +((+items[itemEquiped].As ) * (+items["As Ratio"]) || 0);
+      let newAs = champs[champEquiped][`As lvl ${$(`.lvl${champEquiped}`).val()}`] /= +(1+((+items[itemEquiped].As ) * (+champs[champEquiped]["As Ratio"])) || 1);
       let newCh = champs[champEquiped]["Crit Chance"] += +items[itemEquiped]["Crit Chance"] || 0;
       let newCd = champs[champEquiped]["Crit Damage"] += +items[itemEquiped]["Crit Damage"] || 0;
-      
+
+      console.log(1000*(1-((+items[itemEquiped].As ))));
+      console.log(newAs);
       $(`.Ap${champEquiped}`)[0].innerHTML = `Ap ${newAp}`;
       $(`.Ad${champEquiped}`)[0].innerHTML = `Ad ${(newAd.toFixed(0))}`;
-      $(`.As${champEquiped}`)[0].innerHTML = `As ${newAs}`;
+      $(`.As${champEquiped}`)[0].innerHTML = `As ${newAs.toFixed(0)}`;
       $(`.Ch${champEquiped}`)[0].innerHTML = `Ch ${newCh}`;
       $(`.Cd${champEquiped}`)[0].innerHTML = `Cd ${newCd}`;
     }
@@ -215,24 +234,25 @@ function calcStats() {
 
 function clearFight() {       //все работает. не трогать
   let champTables = document.querySelectorAll(".table td");
-  $(".log1").show();
+  $(".champs_in").show();
   $(".items_in").show();
   $(".champ_intro").show();
   $(".BaronNashor").hide();
   $(".baronFight").hide();
+  $(".logZone").hide();
   for (let childs of champTables ){
     for (let itemsOnChamp of childs.childNodes){//название переменной изменить
       let itemEquiped = itemsOnChamp.getAttribute("name");//название переменной изменить
       let champEquiped = childs.parentNode.parentNode.parentNode.getAttribute("data-champName");
       let newAd = champs[champEquiped][`Ad lvl ${$(`.lvl${champEquiped}`).val()}`] -= +items[itemEquiped].Ad || 0;
       let newAp = champs[champEquiped].Ap -= +items[itemEquiped].Ap || 0;
-      let newAs = champs[champEquiped][`As lvl ${$(`.lvl${champEquiped}`).val()}`] -= +((+items[itemEquiped].As) * (+items["As Ratio"]))||0;
+      let newAs = champs[champEquiped][`As lvl ${$(`.lvl${champEquiped}`).val()}`] *= +(1+((+items[itemEquiped].As ) * (+champs[champEquiped]["As Ratio"])) || 1);
       let newCh = champs[champEquiped]["Crit Chance"] -= +items[itemEquiped]["Crit Chance"] || 0;
       let newCd = champs[champEquiped]["Crit Damage"] -= +items[itemEquiped]["Crit Damage"] || 0;
       
       $(`.Ap${champEquiped}`)[0].innerHTML = `Ap ${newAp}`;
-      $(`.Ad${champEquiped}`)[0].innerHTML = `Ad ${(newAd.toFixed(0))}`;
-      $(`.As${champEquiped}`)[0].innerHTML = `As ${newAs}`;
+      $(`.Ad${champEquiped}`)[0].innerHTML = `Ad ${newAd.toFixed(0)}`;
+      $(`.As${champEquiped}`)[0].innerHTML = `As ${newAs.toFixed(0)}`;
       $(`.Ch${champEquiped}`)[0].innerHTML = `Ch ${newCh}`;
       $(`.Cd${champEquiped}`)[0].innerHTML = `Cd ${newCd}`;
     }
@@ -256,11 +276,12 @@ function startGame() {       //все работает. не трогать
   alert ("Чемпионы не выбраны!");
   start.one("click",startGame);
   return;}
-  $(".log1").hide();
+  $(".champs_in").hide();
   $(".items_in").hide();
   $(".champ_intro").hide();
   $(".baronFight").show();
   $(".BaronNashor").show();
+  $(".logZone").show();
   calcBaronHpReg();//расчет хп регена
   calcBaronMaxHp();//расчет максимального хп
   calcStats();//статистики персонажей

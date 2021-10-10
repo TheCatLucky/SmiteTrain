@@ -1,203 +1,336 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    font-size: 20px;
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+  font-size: 20px;
 }
 
-.buttons{
-    margin: 10px 0px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-.SetUpMenu{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between
-}
-.ChampButton,.ItemButton{
-    margin: 5px;
-    padding: 0;
-    border: none;
-    height: 50px;
-    width: 50px;
-}
-
-.ChampButton:hover{
-    box-shadow: 0px 0px 0px 10px red;;
-}
-.BaronNashor{
-    display: flex;
-    flex-direction: column;
-}
-#Hp{
-    text-align: center;
-    margin-bottom: 5px;
-    font-size: 2rem;
-}
-.BaronNashorHpText{
-    text-align: center;
-    font-size: 2rem;
-}
-.hpBar{
-    display: flex;
-    justify-content: center;
-}
-#perc {
-    width:667px;
-    border:1px solid blue;
-    padding:0px;
-}
-#perc_in {
-    height: 30px;
-    width:100%;
-    background:red;
-}
-.ingameMinuteZone{
-    position: absolute;
-    right: 2rem;
-    top:2rem;
-    padding-right: 0.5rem;
-}
-.ingameMinuteZone span{
-    padding-right: 0.5rem;
-    font-size: 1.5rem; 
-}
-.ingameMinute{
-    height: 40px;
-    width: 60px;
-    font-size: 1.5rem;
-}
-.champ_intro{
-    text-align: center;
-    font-size: 2rem;
-}
-.logZone{
-    float: right;
-    height: 200px;
-    width: 30%;
-    background-color: yellowgreen;
-    overflow: auto;
-}
-.logZone > p {
-    padding-top: 5px;
+.intro {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: #2d3e43;
+  text-align: center;
+  font-size: 200px;
+  color: orange;
+  text-shadow: 1px 1px 0px #ff4800, 2px 2px 0px #ff4800, 3px 3px 0px #ff4800, 4px 4px 0px #ff4800, 5px 5px 0px #ff4800, 6px 6px 0px #ff4800, 7px 7px 0px #ff4800, 8px 8px 0px #ff4800, 9px 9px 0px #ff4800, 10px 10px 0px #ff4800, 20px 15px 25px black;
 }
 
-#champions_list, .items_list{
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
+.intro .intro__choose {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding-left: 250px;
+  margin-top: 25px;
+}
 
+.intro .intro__choose h1 {
+  padding-right: 50px;
+  margin-right: 200px;
+  font-size: 250px;
 }
-#champions_field{
-    position: absolute;
-    bottom: 2rem;
-    display: flex;
-    flex-direction: row;
-}
-#champions_field > div {
-    height: 110px;
-    width: 275px;
-    background-color: indianred;
-    margin: 0 1rem;
 
+.intro .intro__choose h1:hover {
+  font-size: 300px;
 }
-.log1 {
-    position: relative;
-    left: 0px;
-    width: 500px;
-    height: 200px;
-    background: hsla(207, 44%, 49%, 0.4);
-    margin-top: 5px;
-    transition: left .7s linear;
+
+.buttons {
+  margin: 10px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
-#ChampArrow{
-      position: relative;
-      float: right;
-      top: 85px;;
+
+.ChampButton:hover {
+  -webkit-box-shadow: 0px 0px 0px 10px red;
+          box-shadow: 0px 0px 0px 10px red;
 }
-  
-.log2 {
-    position: relative;
-    left: -380px;
-    width: 500px;
-    height: 200px;
-    background:hsla(207, 44%, 49%, 0.4);
-    margin-top: 5px;
-    transition: left .7s linear;
+
+.BaronNashor {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
+
+.BaronNashor .BaronNashorHpText {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.BaronNashor #Hp {
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 2rem;
+}
+
+.BaronNashor .hpBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.BaronNashor .hpBar #perc {
+  width: 667px;
+  border: 1px solid blue;
+  padding: 0px;
+}
+
+.BaronNashor .hpBar #perc #perc_in {
+  height: 30px;
+  width: 100%;
+  background: red;
+}
+
+.ingameMinuteZone {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  padding-right: 0.5rem;
+}
+
+.ingameMinuteZone span {
+  padding-right: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.ingameMinuteZone .ingameMinute {
+  height: 40px;
+  width: 60px;
+  font-size: 1.5rem;
+}
+
+.champ_intro {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.logZone {
+  float: right;
+  height: 200px;
+  width: 30%;
+  background-color: yellowgreen;
+  overflow: auto;
+}
+
+.logZone p {
+  padding-top: 5px;
+}
+
+#champions_list, .items_list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#champions_list button, .items_list button {
+  margin: 5px;
+  padding: 0;
+  border: none;
+  height: 50px;
+  width: 50px;
+}
+
+#champions_field {
+  position: absolute;
+  bottom: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#champions_field .droppable {
+  height: 110px;
+  width: 275px;
+  background-color: indianred;
+  margin: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#champions_field .droppable button {
+  margin: 5px;
+  padding: 0;
+  border: none;
+  height: 50px;
+  width: 50px;
+}
+
+#champions_field .droppable .MenuChamp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#champions_field .droppable .MenuChamp .lvl {
+  background-color: tomato;
+  margin: 5px 0px 0px 5px;
+  height: 40px;
+  width: 50px;
+  font-size: 1.5rem;
+}
+
+#champions_field .droppable .Stats {
+  padding-top: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#champions_field .droppable .Stats p {
+  font-size: 0.8rem;
+}
+
+#champions_field .droppable .table {
+  margin: 10px 5px 10px 0px;
+  position: relative;
+  border: 1px solid;
+  padding: 0;
+}
+
+#champions_field .droppable .table td {
+  border: 1px solid;
+  width: 42px;
+  height: 42px;
+}
+
+#champions_field .droppable .table td img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.champs_in {
+  position: relative;
+  left: 0px;
+  width: 500px;
+  height: 200px;
+  background: rgba(70, 130, 180, 0.4);
+  margin-top: 5px;
+  -webkit-transition: left .7s linear;
+  transition: left .7s linear;
+}
+
+.champs_in #ChampArrow {
+  position: relative;
+  float: right;
+  top: 85px;
+}
+
+.champs_out {
+  position: relative;
+  left: -440px;
+  width: 500px;
+  height: 200px;
+  background: rgba(70, 130, 180, 0.4);
+  margin-top: 5px;
+  -webkit-transition: left .7s linear;
+  transition: left .7s linear;
+}
+
 .items_in {
-    position: relative;
-    left: 0px;
-    width: 500px;
-    height: 200px;
-    background: hsla(207, 44%, 49%, 0.4);
-    transition: left .7s linear;
-}
-#ItemArrow{
-    position: relative;
-    float: right;
-    top: 85px;;
-}
-  
-.items_out {
-    position: relative;
-    left: -380px;
-    width: 500px;
-    height: 200px;
-    background:hsla(207, 44%, 49%, 0.4);
-    margin-top: 120px;
-    transition: left .7s linear;
-}
-.droppable{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.MenuChamp{
-    display: flex;
-    flex-direction: column;
-}
-.lvl{
-    background-color: tomato;
-    margin: 5px 0px 0px 5px;
-    height: 40px;
-    width: 50px;
-    font-size: 1.5rem;
-}
-.droppable .Stats{
-    padding-top: 5px;
-    display: flex;
-    flex-direction: column;
-}
-.Stats > p {
-    font-size: 0.8rem;
-}
-.table{
-    margin:10px 5px 10px 0px;
-    position: relative;
-    border: 1px solid;
-    border-collapse: separate;  
-    padding: 0; 
-}
-.table td {
-    border: 1px solid;
-    width: 42px;
-    height: 42px;
-}
-.table td > img {
-    display: block;
-    width: 40px;
-    height: 40px;
-    margin: auto;
-    padding: 0px;
-}
-.baronFight{
-    display: flex;
-    justify-content: center;
-    padding-right: 100px;
-    background-color: rgb(99, 201, 204);
+  position: relative;
+  left: 0px;
+  width: 500px;
+  height: 200px;
+  background: rgba(70, 130, 180, 0.4);
+  -webkit-transition: left .7s linear;
+  transition: left .7s linear;
 }
 
+.items_in #ItemArrow {
+  position: relative;
+  float: right;
+  top: 85px;
+}
+
+.items_out {
+  position: relative;
+  left: -440px;
+  width: 500px;
+  height: 200px;
+  background: rgba(70, 130, 180, 0.4);
+  -webkit-transition: left .7s linear;
+  transition: left .7s linear;
+}
+
+.items_out #ItemArrow {
+  position: relative;
+  float: right;
+  top: 85px;
+}
+
+.baronFight {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-right: 100px;
+  background-color: #63c9cc;
+}
+/*# sourceMappingURL=style.css.map */

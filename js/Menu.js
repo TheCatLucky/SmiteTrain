@@ -1,15 +1,13 @@
-let menu = document.querySelector('.log1');
+let menu = document.querySelector('.champs_in');
 let arrow = document.querySelector('#ChampArrow')
 const widthScreen = document.documentElement.clientWidth;
 document.body.style.maxWidth = `${widthScreen}px`;  // размер экрана
 function MenuIn(){
-menu.classList.add('log2');
-menu.classList.remove(`log1`);
+menu.classList.add('champs_out');
 arrow.addEventListener("click",MenuOut,{once:true});
 }
 function MenuOut(){
-menu.classList.remove('log2');
-menu.classList.add(`log1`);
+menu.classList.remove('champs_out');
 arrow.addEventListener("click", MenuIn,{once:true});
 }
 
@@ -20,12 +18,10 @@ let itemArrow = document.querySelector("#ItemArrow");
 
 function ItemsIn(){
 item.classList.add('items_out');
-item.classList.remove(`items_in`);
 itemArrow.addEventListener("click",ItemsOut,{once:true});
 }
 function ItemsOut(){
 item.classList.remove('items_out');
-item.classList.add(`items_in`);
 itemArrow.addEventListener("click", ItemsIn,{once:true});
 }
 

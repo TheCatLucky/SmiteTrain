@@ -18,7 +18,7 @@ window.champions =
           console.log("всё")
           return ;} 
         if (chance < ch) {
-          DamageTest = ((ad * ( 1 + cd)).toFixed(0))* 0.5;
+          DamageTest = ((ad * cd).toFixed(0))* 0.5;
           BaronHpCurrent -= DamageTest ;
           logZone.append( `<p>Ари нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
           return BaronHpCurrent;}
@@ -46,7 +46,7 @@ window.champions =
           console.log("всё")
           return ;} 
         if (chance < ch) {
-          DamageTest = (ad * ( 1 + cd)).toFixed(0)* 0.5;
+          DamageTest = (ad * cd).toFixed(0)* 0.5;
           BaronHpCurrent -= DamageTest ;
           logZone.append(`<p>Диана нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
           return BaronHpCurrent;}
@@ -62,6 +62,7 @@ window.champions =
     "Ad lvl 1" : 62,"Ad lvl 2" : 64.74,"Ad lvl 3" : 67.61,"Ad lvl 4" : 70.61,"Ad lvl 5" : 73.74,"Ad lvl 6" : 77.01,"Ad lvl 7" : 80.41,"Ad lvl 8" : 83.94,"Ad lvl 9" : 87.61,"Ad lvl 10" : 91.41,"Ad lvl 11" : 95.34,"Ad lvl 12" : 99.41,"Ad lvl 13" : 103.61,"Ad lvl 14" : 107.94,"Ad lvl 15" : 112.41,"Ad lvl 16" : 117.00,"Ad lvl 17" : 121.74,"Ad lvl 18" : 126.60,
     "Ap" : 0,
     "As lvl 1": 1468,"As lvl 2": 1434,"As lvl 3": 1400,"As lvl 4": 1365,"As lvl 5": 1331,"As lvl 6": 1297,"As lvl 7": 1264,"As lvl 8": 1231,"As lvl 9": 1199,"As lvl 10": 1167,"As lvl 11": 1136,"As lvl 12": 1105,"As lvl 13": 1076,"As lvl 14": 1046,"As lvl 15": 1018,"As lvl 16": 990,"As lvl 17": 963,"As lvl 18": 937,
+    "As Ratio" : 0.568,
     "Crit Chance" : 0,
     "Crit Damage" : 1.75,
     HandDamage(ad,as,ch,cd){
@@ -73,7 +74,7 @@ window.champions =
           console.log("всё")
           return ;} 
         if (chance < ch) {
-          DamageTest = (ad * ( 1 + cd)).toFixed(0)* 0.5;
+          DamageTest = (ad * cd).toFixed(0)* 0.5;
           BaronHpCurrent -= DamageTest ;
           logZone.append( `<p>Кейтлин нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
           return BaronHpCurrent;}
@@ -101,7 +102,7 @@ window.champions =
           console.log("всё")
           return ;} 
         if (chance < ch) {
-          DamageTest = (ad * ( 1 + cd)).toFixed(0) * 0.5;
+          DamageTest = (ad * cd).toFixed(0) * 0.5;
           BaronHpCurrent -= DamageTest ;
           logZone.append(`<p>Кассиопея нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
           return BaronHpCurrent;}
@@ -129,7 +130,7 @@ window.champions =
           console.log("всё")
           return ;} 
         if (chance < ch) {
-          DamageTest = (ad * ( 1 + cd)).toFixed(0) * 0.5;
+          DamageTest = (ad * cd).toFixed(0) * 0.5;
           BaronHpCurrent -= DamageTest ;
           logZone.append(`<p>Твистед Фейт нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
           return BaronHpCurrent;}
@@ -157,7 +158,7 @@ window.champions =
           console.log("всё")
           return ;} 
         if (chance < ch) {
-          DamageTest = (ad * ( 1 + cd)).toFixed(0) * 0.5;
+          DamageTest = (ad * cd).toFixed(0) * 0.5;
           BaronHpCurrent -= DamageTest;
           logZone.append(`<p>Зиггс нанес ${DamageTest.toFixed(0)} крит урона</p>`);
           return BaronHpCurrent;}
