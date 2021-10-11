@@ -6,7 +6,10 @@
   font-size: 20px;
 }
 
-$intro-color : #2d3e43;
+$intro_color : #2d3e43;
+$menu_color :linear-gradient(90deg,hsla(204, 84%, 13%, 0.9),hsla(180, 84%, 13%, 0.9));
+$item_border_color : 1px solid rgb(192, 192, 17);
+$champ_border_color : 0px 0px 3px 3px rgb(192, 192, 17);
 @mixin button{
   button{
   margin: 5px;
@@ -16,7 +19,10 @@ $intro-color : #2d3e43;
   width: 50px;
   }
 }
-
+body {
+  background: url(../img/back.jpg) no-repeat;
+  background-size: 100%;
+}
 .intro{
   position: absolute;
   display: flex;
@@ -25,10 +31,11 @@ $intro-color : #2d3e43;
   width: 100%;
   height: 100%;
   z-index: 1000;
-  background-color: $intro-color;
+  background-color: $intro_color;
   text-align:center;
   font-size:200px;
   color: orange;
+  cursor: default;
   text-shadow:
     1px 1px 0px rgb(255, 72, 0),
     2px 2px 0px rgb(255, 72, 0),
@@ -55,6 +62,7 @@ $intro-color : #2d3e43;
       }
       h1:hover{
         font-size: 300px;
+        cursor: pointer;
       }
     }
 }
@@ -66,7 +74,7 @@ $intro-color : #2d3e43;
 }
 
 .ChampButton:hover{
-  box-shadow: 0px 0px 0px 10px red;;
+  box-shadow: $champ_border_color;
 }
 
 .BaronNashor{
@@ -152,7 +160,7 @@ $intro-color : #2d3e43;
   .droppable {
     height: 110px;
     width: 275px;
-    background-color: indianred;
+    background-color: hsla(204, 84%, 13%, 0.9);
     margin: 0 1rem;
     display: flex;
     flex-direction: row;
@@ -164,11 +172,12 @@ $intro-color : #2d3e43;
       flex-direction: column;
 
       .lvl{
-        background-color: tomato;
+        background-color: hsla(204, 84%, 13%, 0.9);
         margin: 5px 0px 0px 5px;
         height: 40px;
         width: 50px;
         font-size: 1.5rem;
+        color: white;
       }
     }
 
@@ -176,6 +185,8 @@ $intro-color : #2d3e43;
       padding-top: 5px;
       display: flex;
       flex-direction: column;
+      color: rgb(192, 192, 17);
+      font-weight: 700;
 
       p {
         font-size: 0.8rem;
@@ -211,7 +222,7 @@ $intro-color : #2d3e43;
   left: 0px;
   width: 500px;
   height: 200px;
-  background: hsla(207, 44%, 49%, 0.4);
+  background: $menu_color;
   margin-top: 5px;
   transition: left .7s linear;
 
@@ -227,7 +238,6 @@ $intro-color : #2d3e43;
   left: -440px;
   width: 500px;
   height: 200px;
-  background:hsla(207, 44%, 49%, 0.4);
   margin-top: 5px;
   transition: left .7s linear;
 }
@@ -237,8 +247,12 @@ $intro-color : #2d3e43;
   left: 0px;
   width: 500px;
   height: 200px;
-  background: hsla(207, 44%, 49%, 0.4);
+  background: $menu_color;
   transition: left .7s linear;
+
+  button{
+    border: $item_border_color;
+  }
 
   #ItemArrow{
     position: relative;
@@ -252,7 +266,6 @@ $intro-color : #2d3e43;
   left: -440px;
   width: 500px;
   height: 200px;
-  background:hsla(207, 44%, 49%, 0.4);
   transition: left .7s linear;
 
   #ItemArrow{
@@ -266,5 +279,4 @@ $intro-color : #2d3e43;
   display: flex;
   justify-content: center;
   padding-right: 100px;
-  background-color: rgb(99, 201, 204);
 }

@@ -10,7 +10,7 @@ function calcAD(num1,num2 ){
     massAD.push(`"Ad lvl 1" : ${num1}`);
     for (let lvl = 2; lvl <= 18; lvl++){
         let adDamage = 0;
-        adDamage = num1 + g *(lvl - 1)*(0.7025 + 0.0175*(lvl - 1) ) ;
+        adDamage = num1 + g * (lvl - 1) * (0.7025 + 0.0175 * (lvl - 1) ) ;
         massAD.push(`"Ad lvl ${lvl}" : ${adDamage.toFixed(2)}`);
     }
     
@@ -28,9 +28,9 @@ function calcAS(num1, num2){
     
     for (let lvl = 1; lvl <= 18; lvl ++){
         let AttackSpeed = 0;
-        AttackSpeed = 1000/(num1 + (g *(lvl - 1)*(0.7025 + 0.0175*(lvl - 1)))*ASRatio);
-        console.log(`As lvl ${lvl} ${(num1 + (g *(lvl - 1)*(0.7025 + 0.0175*(lvl - 1)))*ASRatio).toFixed(3)}`)
-        massAS.push(`"As lvl ${lvl}": ${AttackSpeed.toFixed(0)}`);
+        AttackSpeed = (num1 + (g * (lvl - 1) * (0.7025 + 0.0175 * (lvl - 1)))*ASRatio);
+        console.log(`As lvl ${lvl} ${(num1 + (g * (lvl - 1) * (0.7025 + 0.0175 * (lvl - 1))) * ASRatio).toFixed(3)}`)
+        massAS.push(`"As lvl ${lvl}": ${AttackSpeed.toFixed(3)}`);
         
     }
     
