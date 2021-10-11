@@ -7,6 +7,11 @@
   font-size: 20px;
 }
 
+body {
+  background: url(../img/back.jpg) no-repeat;
+  background-size: 100%;
+}
+
 .intro {
   position: absolute;
   display: -webkit-box;
@@ -26,6 +31,7 @@
   text-align: center;
   font-size: 200px;
   color: orange;
+  cursor: default;
   text-shadow: 1px 1px 0px #ff4800, 2px 2px 0px #ff4800, 3px 3px 0px #ff4800, 4px 4px 0px #ff4800, 5px 5px 0px #ff4800, 6px 6px 0px #ff4800, 7px 7px 0px #ff4800, 8px 8px 0px #ff4800, 9px 9px 0px #ff4800, 10px 10px 0px #ff4800, 20px 15px 25px black;
 }
 
@@ -49,6 +55,7 @@
 
 .intro .intro__choose h1:hover {
   font-size: 300px;
+  cursor: pointer;
 }
 
 .buttons {
@@ -66,8 +73,8 @@
 }
 
 .ChampButton:hover {
-  -webkit-box-shadow: 0px 0px 0px 10px red;
-          box-shadow: 0px 0px 0px 10px red;
+  -webkit-box-shadow: 0px 0px 3px 3px #c0c011;
+          box-shadow: 0px 0px 3px 3px #c0c011;
 }
 
 .BaronNashor {
@@ -185,7 +192,7 @@
 #champions_field .droppable {
   height: 110px;
   width: 275px;
-  background-color: indianred;
+  background-color: rgba(5, 39, 61, 0.9);
   margin: 0 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -218,11 +225,12 @@
 }
 
 #champions_field .droppable .MenuChamp .lvl {
-  background-color: tomato;
+  background-color: rgba(5, 39, 61, 0.9);
   margin: 5px 0px 0px 5px;
   height: 40px;
   width: 50px;
   font-size: 1.5rem;
+  color: white;
 }
 
 #champions_field .droppable .Stats {
@@ -234,6 +242,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  color: #c0c011;
+  font-weight: 700;
 }
 
 #champions_field .droppable .Stats p {
@@ -268,7 +278,8 @@
   left: 0px;
   width: 500px;
   height: 200px;
-  background: rgba(70, 130, 180, 0.4);
+  background: -webkit-gradient(linear, left top, right top, from(rgba(5, 39, 61, 0.9)), to(rgba(5, 61, 61, 0.9)));
+  background: linear-gradient(90deg, rgba(5, 39, 61, 0.9), rgba(5, 61, 61, 0.9));
   margin-top: 5px;
   -webkit-transition: left .7s linear;
   transition: left .7s linear;
@@ -285,7 +296,6 @@
   left: -440px;
   width: 500px;
   height: 200px;
-  background: rgba(70, 130, 180, 0.4);
   margin-top: 5px;
   -webkit-transition: left .7s linear;
   transition: left .7s linear;
@@ -296,9 +306,14 @@
   left: 0px;
   width: 500px;
   height: 200px;
-  background: rgba(70, 130, 180, 0.4);
+  background: -webkit-gradient(linear, left top, right top, from(rgba(5, 39, 61, 0.9)), to(rgba(5, 61, 61, 0.9)));
+  background: linear-gradient(90deg, rgba(5, 39, 61, 0.9), rgba(5, 61, 61, 0.9));
   -webkit-transition: left .7s linear;
   transition: left .7s linear;
+}
+
+.items_in button {
+  border: 1px solid #c0c011;
 }
 
 .items_in #ItemArrow {
@@ -312,7 +327,6 @@
   left: -440px;
   width: 500px;
   height: 200px;
-  background: rgba(70, 130, 180, 0.4);
   -webkit-transition: left .7s linear;
   transition: left .7s linear;
 }
@@ -331,6 +345,5 @@
       -ms-flex-pack: center;
           justify-content: center;
   padding-right: 100px;
-  background-color: #63c9cc;
 }
 /*# sourceMappingURL=style.css.map */

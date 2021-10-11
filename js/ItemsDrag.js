@@ -1,6 +1,3 @@
-
-
-
 setInterval(function() { 
   let parent = document.querySelectorAll('.ItemImg');
   
@@ -108,18 +105,36 @@ setInterval(function() {
       let x = event.clientX;
       let y = event.clientY;
       let elem = document.elementFromPoint(x,y);
+
       elem.hidden = true;
       let secondElem = document.elementFromPoint(x,y);
       let droppableBelow = secondElem.closest('.droppable');
       elem.hidden = false;
-      console.log(droppableBelow.classList[1]);
+
       let itemName = elem.getAttribute("data-name");
       let itemSrc = elem.getAttribute("alt");
+      let lwCounter = 0;
+      let mytchicCounter = 0;
       elem.remove();  //удалить картинку
       let champTables = document.querySelectorAll(".table td");
       for (let cell of champTables){
         if ((cell.parentNode.parentNode.parentNode).getAttribute("data-champName") == droppableBelow.classList[1]){
+          for (let td of cell.childNodes){
+            let itemName = td.getAttribute("name");
+            if (items[itemName]["Unique"] == "LW"){
+              lwCounter++;
+            }
+            if (items[itemName]["Unique"] == "Mythic"){
+              mytchicCounter++;
+            }
+          }
           if(cell.innerHTML == ""){
+            if (lwCounter >= 1 && items[itemName]["Unique"] == "LW"){
+              break;
+            }
+            if (mytchicCounter >= 1 && items[itemName]["Unique"] == "Mythic"){
+              break;
+            }
             img = document.createElement("img");
                     let place = cell;
                     img.setAttribute("src", `../img/${itemSrc}`);
@@ -137,7 +152,6 @@ setInterval(function() {
     function removeThisItem(){
         let target = event.target;
         //let name = target.getAttribute("name");
-        console.log(target);
         if (target.tagName != 'IMG') return;
         target.remove();        
     }
