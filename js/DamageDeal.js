@@ -150,7 +150,7 @@ function calcBaronHpReg() {
 function calcBaronMaxHp() {
   let minuteScale = $(".ingameMinute").val();
   
-  BaronHpMax = 1 + 180 * minuteScale;
+  BaronHpMax = 9000 + 180 * minuteScale;
   return (BaronHpCurrent = BaronHpMax);
 }
 function setBaronHp() {
