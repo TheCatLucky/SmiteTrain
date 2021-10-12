@@ -13,12 +13,23 @@ window.champions =
     "Lethality" : 0,
     "Ad penetration" : 0,
     "Has BotrK" : 0,
-    HandDamage(ad, as, ch, cd, lt, pen, lvl){
+    "Has IE" : 0,
+    "Has W`E" : 0,
+    "Has NT" : 0,
+    HandDamage(ad, as, ch, cd, lt, pen, lvl, ap){
+      
       as = 1000 / as;
       let botrk = 0;
+      let witsEnd = 0;
+      let nashTooth = 0;
       let HDmg = setTimeout ( function Handdmg(){
+        if (BaronHpCurrent <= 0) { 
+          clearTimeout(HDmg);
+          console.log("всё");
+          return ;
+        }
         HDmg = setTimeout (Handdmg,as);
-        if (champions.Ziggs["Has BotrK"]){
+        if (champions.Ahri["Has BotrK"]){
           if( 0.06 * BaronHpCurrent > 60){
             botrk = 60;
           }
@@ -26,20 +37,22 @@ window.champions =
             botrk = 0.06 * BaronHpCurrent;
           };
         }
+        if (champions.Ahri["Has W`E"]){
+          witsEnd = items.WitsEnd[`WE lvl${lvl}`];
+        }
+        if (champions.Ahri["Has NT"]){
+          nashTooth = 15 + ( 0.2 * ap);
+        }
+
         let chance = (Math.random()).toFixed(2);
-        if (BaronHpCurrent <= 0) { 
-          clearTimeout(HDmg);
-          console.log("всё")
-          return ;
-        } 
         if (chance < ch) {
-          DamageTest = (((ad + botrk) * (100/(100 + (120 * (1 - pen)) - lt * (0.6 + 0.4 * (lvl / 18))))) * cd);
+          DamageTest = (((ad + botrk) * (100/(100 + (120 * (1 - pen)) - lt * (0.6 + 0.4 * (lvl / 18))))) * cd) + ((witsEnd + nashTooth) * (100/(100 + (70))));
           BaronHpCurrent -= DamageTest.toFixed(0) ;
           logZone.append( `<p>Ари нанесла ${DamageTest.toFixed(0)} крит урона</p>`);
           return BaronHpCurrent;
         }
         else {
-          DamageTest = ((ad + botrk) * (100/(100 + (120 * (1 - pen)) - lt * (0.6 + 0.4 * (lvl / 18)))));
+          DamageTest = ((ad + botrk) * (100/(100 + (120 * (1 - pen)) - lt * (0.6 + 0.4 * (lvl / 18)))) + ((witsEnd + nashTooth) * (100/(100 + (70)))));
           BaronHpCurrent -= DamageTest.toFixed(0) ;
           logZone.append(`<p>Ари нанесла ${DamageTest.toFixed(0)} урона</p>`);
           return BaronHpCurrent
@@ -59,12 +72,13 @@ window.champions =
     "Lethality" : 0,
     "Ad penetration" : 0,
     "Has BotrK" : 0,
+    "Has IE" : 0,
     HandDamage(ad, as, ch, cd, lt, pen, lvl){
       as = 1000 / as;
       let botrk = 0;
       let HDmg = setTimeout ( function Handdmg(){
         HDmg = setTimeout (Handdmg,as);
-        if (champions.Ziggs["Has BotrK"]){
+        if (champions.Diana["Has BotrK"]){
           if( 0.06 * BaronHpCurrent > 60){
             botrk = 60;
           }
@@ -101,12 +115,13 @@ window.champions =
     "Lethality" : 0,
     "Ad penetration" : 0,
     "Has BotrK" : 0,
+    "Has IE" : 0,
     HandDamage(ad, as, ch, cd, lt, pen, lvl){
       as = 1000 / as;
       let botrk = 0;
       let HDmg = setTimeout ( function Handdmg(){
         HDmg = setTimeout (Handdmg,as);
-        if (champions.Ziggs["Has BotrK"]){
+        if (champions.Caitlyn["Has BotrK"]){
           if( 0.06 * BaronHpCurrent > 60){
             botrk = 60;
           }
@@ -143,12 +158,13 @@ window.champions =
     "Lethality" : 0,
     "Ad penetration" : 0,
     "Has BotrK" : 0,
+    "Has IE" : 0,
     HandDamage(ad, as, ch, cd, lt, pen, lvl){
       as = 1000 / as;
       let botrk = 0;
       let HDmg = setTimeout ( function Handdmg(){
         HDmg = setTimeout (Handdmg,as);
-        if (champions.Ziggs["Has BotrK"]){
+        if (champions.Cassiopeia["Has BotrK"]){
           if( 0.06 * BaronHpCurrent > 60){
             botrk = 60;
           }
@@ -185,12 +201,13 @@ window.champions =
     "Lethality" : 0,
     "Ad penetration" : 0,
     "Has BotrK" : 0,
+    "Has IE" : 0,
     HandDamage(ad, as, ch, cd, lt, pen, lvl){
       as = 1000 / as;
       let botrk = 0;
       let HDmg = setTimeout ( function Handdmg(){
         HDmg = setTimeout (Handdmg,as);
-        if (champions.Ziggs["Has BotrK"]){
+        if (champions.TwistedFate["Has BotrK"]){
           if( 0.06 * BaronHpCurrent > 60){
             botrk = 60;
           }
@@ -227,6 +244,7 @@ window.champions =
     "Lethality" : 0,
     "Ad penetration" : 0,
     "Has BotrK" : 0,
+    "Has IE" : 0,
     HandDamage(ad, as, ch, cd, lt, pen, lvl){
       as = 1000 / as;
       let botrk = 0;

@@ -1,23 +1,23 @@
 window.items = {
 NeedlesslyLargeRod :{
-    "name" : "Needlessly Large Rod",
-    "Ap" : "+60"
+  "name" : "Needlessly Large Rod",
+  "Ap" : "+60"
 },
 BFSword : {
-    "name" : "B. F. Sword",
-    "Ad" : "+40"
+  "name" : "B. F. Sword",
+  "Ad" : "+40",
 },
 AmplifyingTome : {
-    "name" : "Amplifying Tome",
-    "Ap" : "+20",
+  "name" : "Amplifying Tome",
+  "Ap" : "+20",
 },
 Pickaxe :{
-    "name" : "Pickaxe",
-    "Ad" : "+25"
+  "name" : "Pickaxe",
+  "Ad" : "+25"
 },
 BlastingWand : {
-    "name" : "Blasting Wand",
-    "Ap" : "+40",
+  "name" : "Blasting Wand",
+  "Ap" : "+40",
 },
 Dagger : {
   "name" : "Dagger",
@@ -33,6 +33,7 @@ LongSword : {
 },
 BotrK : {
   "name" : "Blade of the Ruined King",
+  "Unique" : "BotrK",
   "Ad" : "+40",
   "As" : "+0.25"
 },
@@ -45,41 +46,49 @@ ImmortalShieldbow : {
 },
 Stormrazor : {
   "name" : "Stormrazor",
+  "Unique" : "Stromrazor",
   "Ad" : "+40",
   "As" : "+0.15",
-  "Crit Chance" : "+0.2"
+  "Crit Chance" : "+0.2",
 },
 WitsEnd : {
   "name" : "Wit's End",
+  "Unique" : "WitsEnd",
   "Ad" : "+40",
-  "As" : "+0.4"
+  "As" : "+0.4",
+  "WE lvl1" : 15,"WE lvl2" : 15,"WE lvl3" : 15,"WE lvl4" : 15,"WE lvl5" : 15,"WE lvl6" : 15,"WE lvl7" : 15,"WE lvl8" : 15,"WE lvl9" : 25,"WE lvl10" : 35,"WE lvl11" : 45,"WE lvl12" : 55,"WE lvl13" : 65,"WE lvl14" : 75,"WE lvl15" : 76.25,"WE lvl6" : 77.5,"WE lvl17" : 78.75,"WE lvl18" : 80,
 },
 YoumuusGhostblade : {
   "name" : "Youmuu's Ghostblade",
+  "Unique" : "Youmuu",
   "Ad" : "+55",
-  "Lethality" : "+18"
+  "Lethality" : "+18",
 },
 UmbralGlaive : {
   "name" : "Umbral Glaive",
+  "Unique" : "Glaive",
   "Ad" : "+50",
-  "Lethality" : "+10"
+  "Lethality" : "+10",
 },
 TitanicHydra : {
   "name" : "Titanic Hydra",
-  "Ad" : "+30"
+  "Unique" : "Hydra",
+  "Ad" : "+30",
 },
 Collector : {
   "name" : "The Collector",
+  "Unique" : "Collector",
   "Ad" : "+50",
   "Crit Chance" : "+0.2",
-  "Lethality" : "+12"
+  "Lethality" : "+12",
 },
 SterakGage : {
   "name" : "Sterak's Gage",
+  "Unique" : "LifeLine",
   "Ad" : "+50"
 },
 InfinityEdge : {
-  "name" : "Infinity Edge",
+  "name" : "InfinityEdge",
   "Ad" : "+70",
   "Crit Chance" : "+0.2",
 },
@@ -97,7 +106,15 @@ LordDominik : {
   "Ad penetration" : "+0.35"
 },
 RapidFirecannon : {
+  "name" : "Rapid Fire Cannon",
+  "Unique" : "RFC",
   "As" : "+0.35",
   "Crit Chance" : "+0.2"
+},
+NashorsTooth : {
+  "name" : "Nashor`s Tooth",
+  "Unique" : "NashorsTooth",
+  "Ap" : "+100",
+  "As" : "+0.5",
 }
 }

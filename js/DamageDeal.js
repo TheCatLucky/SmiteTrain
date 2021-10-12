@@ -1,4 +1,4 @@
-//$(".intro").hide(); // на время разработки
+$(".intro").hide(); // на время разработки
 // объекты с данными
 const champs = window.champions;
 const items = window.items;
@@ -79,9 +79,9 @@ function selectChamp() {
   </div>
   <table  class="table" data-champName="${name}">
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td id="1${name}"></td>
+      <td id="2${name}"></td>
+      <td id="3${name}"></td>
     </tr>
     <tr>
       <td></td>
@@ -135,7 +135,8 @@ function damage() {
     champs[img.alt]["Crit Damage"],
     champs[img.alt]["Lethality"],
     champs[img.alt]["Ad penetration"],
-    $(`.lvl${img.alt}`).val()
+    $(`.lvl${img.alt}`).val(),
+    champs[img.alt]["Ap"],
     ));
   span.html(`${BaronHpCurrent.toFixed(0)}`);
   return BaronHpCurrent;
@@ -226,24 +227,29 @@ function checkBaronHp () {                               //все работае
 
 function calcStats() {
   let champTables = document.querySelectorAll(".table td");
-  let infinCounter = 0;
+  
   for (let childs of champTables ){
     for (let itemsOnChamp of childs.childNodes){
+
       let itemEquiped = itemsOnChamp.getAttribute("name");
       let champEquiped = childs.parentNode.parentNode.parentNode.getAttribute("data-champName");
 
       if (items[itemEquiped]["name"] == "Infinity Edge"){
-        if (infinCounter > 1){ 
-          infinCounter++
-        }
-        else{
-          infinCounter = 1;
-        }
+        champs[champEquiped]["Has IE"] = 1;
       }
 
       if (items[itemEquiped]["name"] == "Blade of the Ruined King"){
         champs[champEquiped]["Has BotrK"] = 1;
       }
+
+      if (items[itemEquiped]["name"] == "Wit's End"){
+        champs[champEquiped]["Has W`E"] = 1;
+      }
+
+      if (items[itemEquiped]["name"] == "Nashor`s Tooth"){
+        champs[champEquiped]["Has NT"] = 1;
+      }
+
 
       let newAd = champs[champEquiped][`Ad lvl ${$(`.lvl${champEquiped}`).val()}`] += +items[itemEquiped].Ad || 0;
       let newAp = champs[champEquiped].Ap += +items[itemEquiped].Ap || 0;
@@ -253,11 +259,11 @@ function calcStats() {
       champs[champEquiped]["Lethality"] += +items[itemEquiped]["Lethality"] || 0;
       champs[champEquiped]["Ad penetration"] += +items[itemEquiped]["Ad penetration"] || 0;
 
-      if (infinCounter == 1 && champs[champEquiped]["Crit Chance"] >= 0.6){
-        newCd = champs[champEquiped]["Crit Damage"] += 0.35;
-        infinCounter ++;
+      if (champs[champEquiped]["Has IE"] == 1 && champs[champEquiped]["Crit Chance"] >= 0.6){
+        newCd = champs[champEquiped]["Crit Damage"] = 2.1;
+        champs[champEquiped]["Has IE"] = 1;
       }
-      
+    
       $(`.Ap${champEquiped}`)[0].innerHTML = `Ap ${newAp}`;
       $(`.Ad${champEquiped}`)[0].innerHTML = `Ad ${newAd.toFixed(0)}`;
       $(`.As${champEquiped}`)[0].innerHTML = `As ${newAs.toFixed(3)}`;
@@ -269,11 +275,9 @@ function calcStats() {
 
 function clearFight() {       //все работает. не трогать
   let champTables = document.querySelectorAll(".table td");
-  let infinCounter = 0;
 
   if (BaronHpCurrent >= 0){
     BaronHpCurrent = 0;
-    console.log(BaronHpCurrent);
   }
 
   $("body").css({
@@ -286,25 +290,16 @@ function clearFight() {       //все работает. не трогать
   $(".BaronNashor").hide();
   $(".baronFight").hide();
   $(".logZone").hide();
+ 
   for (let childs of champTables ){
-    for (let itemsOnChamp of childs.childNodes){//название переменной изменить
-      let itemEquiped = itemsOnChamp.getAttribute("name");//название переменной изменить
+    for (let itemsOnChamp of childs.childNodes){
+      let itemEquiped = itemsOnChamp.getAttribute("name");
       let champEquiped = childs.parentNode.parentNode.parentNode.getAttribute("data-champName");
       let newCd = champs[champEquiped]["Crit Damage"];
 
-      if (items[itemEquiped]["name"] == "Infinity Edge"){
-        if (infinCounter >= 1){ 
-          infinCounter++;
-          console.log(infinCounter);
-        }
-        else{
-          infinCounter = 1;
-        }
-      }
-
-      if (infinCounter == 1 && champs[champEquiped]["Crit Chance"] >= 0.6){
-         newCd = champs[champEquiped]["Crit Damage"] -= 0.35;
-         infinCounter++
+      if (champs[champEquiped]["Has IE"] == 1 && champs[champEquiped]["Crit Damage"] != 1.75){
+        newCd = champs[champEquiped]["Crit Damage"] -= 0.35;
+        champs[champEquiped]["Has IE"] == 0
       }
 
       let newAd = champs[champEquiped][`Ad lvl ${$(`.lvl${champEquiped}`).val()}`] -= +items[itemEquiped].Ad || 0;
@@ -313,7 +308,6 @@ function clearFight() {       //все работает. не трогать
       let newCh = champs[champEquiped]["Crit Chance"] -= +items[itemEquiped]["Crit Chance"] || 0;
       champs[champEquiped]["Lethality"] -= +items[itemEquiped]["Lethality"] || 0;
       champs[champEquiped]["Ad penetration"] -= +items[itemEquiped]["Ad penetration"] || 0;
-      newCd = champs[champEquiped]["Crit Damage"] -= +items[itemEquiped]["Crit Damage"] || 0;
       
       $(`.Ap${champEquiped}`)[0].innerHTML = `Ap ${newAp}`;
       $(`.Ad${champEquiped}`)[0].innerHTML = `Ad ${newAd.toFixed(0)}`;
