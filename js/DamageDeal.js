@@ -19,10 +19,10 @@ let BaronHpRegen;
 start.one("click",startGame);
 clearField.on("click",clearInGameZone);
 
-Array.from(buttons).forEach(function(btn) {
-  btn.setAttribute(`listener`,`1`);
-  btn.addEventListener("click", selectChamp,{once:true});
-});
+$.each(buttons, function(){
+  $(this).attr('listener',"1");
+  $(this).one("click",selectChamp);
+})
 
 $(".ingameMinute").on("input",function () {
   if ($(".ingameMinute").val() > 99){
@@ -39,12 +39,10 @@ $(".ingameMinute").on("blur",function () {
 $(".intro__choose>h1").one("click", function () {
   if ($(this).text() == "D"){
     smiteKey = 68;
-    console.log(smiteKey);
     $(".intro").fadeToggle(500);
   }
   if ($(this).text() == "F"){
     smiteKey = 70;
-    console.log(smiteKey);
     $(".intro").fadeToggle(500);
   }
 });
@@ -58,10 +56,9 @@ function selectChamp() {
   let name = target.getAttribute('data-object');
   let picture = `<img src="../img/${name}.png" alt="${name}" id="${name}remove" class="ChampSelected" width="50px" height="50px"></img>`;
   let div = document.createElement('div');
-
   if (target.tagName != 'IMG') return;
   if (field.children().length == 5) {
-    target.addEventListener("click", selectChamp,{once:true})
+    $(this).one("click",selectChamp);
     return ;} // если выбраны персы и был нажат клик, то вновь дается событие
   target.removeAttribute(`listener`);
    
@@ -89,9 +86,10 @@ function selectChamp() {
       <td></td>
     </tr>
   </table>`;
-  Array.from(field.children()).forEach(function(pict){
-    pict.addEventListener("click",removeChamp)
-  });
+ 
+  field.children().off("click",removeChamp);
+  field.children().on("click",removeChamp);
+
   $(`.lvl${name}`).on("input",function (){
     if ($(`.lvl${name}`).val() > 18){
       $(`.lvl${name}`).val("18");
@@ -112,16 +110,10 @@ function removeChamp() {
   let targetRemove = $(`#${name}`).closest(".droppable");
 
   targetRemove.remove();
-  Array.from(buttons).forEach(function(btn) {
-    let result = btn.hasAttribute(`listener`);
-    
-    if (result){
-      return;
-    }
-    name2.attr("listener","1");
-    name2.one("click", selectChamp);
-    }); 
-    console.log(ChampName);
+ 
+  console.log(name2);
+  name2.attr('listener',"1");
+  name2.one("click",selectChamp);
   damage -= champs[ChampName]["Ad lvl 1"];   
 }
 
@@ -201,10 +193,11 @@ function smite(keydown) {
     else {
       BaronHpCurrent -= 900;
       alert (`У нашора осталось еще ${BaronHpCurrent} здоровья!`);
+      BaronHpCurrent = 0;
       return BaronHpCurrent;
     }
   }  
-  document.addEventListener("keydown",smite,{once:true}); 
+  $("body").one("click",smite);
   return BaronHpCurrent;
 }
 
@@ -281,7 +274,7 @@ function clearFight() {       //все работает. не трогать
   }
 
   $("body").css({
-    "background" : "url(../img/back.jpg) no-repeat",
+    "background" : "url(../img/pickPhase.jpg) no-repeat",
     "background-size": "100%"
   });
   $(".champs_in").show();
@@ -351,6 +344,6 @@ function startGame() {       //все работает. не трогать
   baronHpReg(); // исцеление
   autoSmite();
   clear.one("click",clearFight);
-  document.addEventListener("keydown",smite,{once:true});
+  $("body").one("click",smite);
   return BaronHpCurrent;
 }
