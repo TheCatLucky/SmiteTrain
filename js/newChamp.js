@@ -1,8 +1,8 @@
 
 
 
-let adPerLvl;
-let asPerLvl;
+let adPerLvl = null;
+let asPerLvl = null;
 function calcAD(num1,num2 ){
         
     let massAD = [];

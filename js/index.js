@@ -1,4 +1,4 @@
-$(".intro").hide(); // на время разработки
+//$(".intro").hide(); // на время разработки
 // объекты с данными
 const champs = window.champions;
 const items = window.items;
@@ -11,10 +11,10 @@ let logZone = $("#logZone");
 let start = $("#Start");
 let clear = $("#Clear");
 let clearField = $("#ClearField");
-let smiteKey;
-let BaronHpCurrent;
-let BaronHpMax;
-let BaronHpRegen;
+let smiteKey = null;
+let BaronHpCurrent = null;
+let BaronHpMax = null;
+let BaronHpRegen = null;
 
 start.one("click",startGame);
 clearField.on("click",clearInGameZone);
