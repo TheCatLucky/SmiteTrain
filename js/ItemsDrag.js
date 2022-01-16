@@ -140,7 +140,7 @@ function setItem(){
       if(cell.innerHTML == ""){
         img = document.createElement("img");
         let place = cell;
-        img.setAttribute("src", `img/${itemSrc}`);
+        img.setAttribute("src", `./${itemSrc}`);
         img.setAttribute("width", "40px");
         img.setAttribute("height", "40px");
         img.setAttribute("name",`${itemName}`)

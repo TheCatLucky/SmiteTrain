@@ -322,7 +322,7 @@ function clearInGameZone() {
 
 logZone.on('DOMSubtreeModified', function(){$(".logZone > p").last()[0].scrollIntoView(false)});
 
-function startGame() {ь
+function startGame() {
   if (Array.from(field.children()).length == 0) {
   alert ("Чемпионы не выбраны!");
   start.one("click",startGame);
