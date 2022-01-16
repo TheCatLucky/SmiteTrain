@@ -54,7 +54,7 @@ $(".logZone").hide();
 function selectChamp() {
   let target = event.target;
   let name = target.getAttribute('data-object');
-  let picture = `<img src="./img/${name}.png" alt="${name}" id="${name}remove" class="ChampSelected" width="50px" height="50px"></img>`;
+  let picture = `<img src="img/${name}.png" alt="${name}" id="${name}remove" class="ChampSelected" width="50px" height="50px"></img>`;
   let div = document.createElement('div');
   if (target.tagName != 'IMG') return;
   if (field.children().length == 5) {
@@ -153,7 +153,7 @@ function setBaronHp() {
   return BaronHpCurrent;
 }
 
-function baronHpReg() {  //все работает
+function baronHpReg() {
   let heal = setTimeout ( function BaronHeal() { // пассивное исцеление
     heal = setTimeout (BaronHeal,5000);
     if (BaronHpCurrent <= 0) { 
@@ -268,7 +268,7 @@ function calcStats() {
   }
 }
 
-function clearFight() {       //все работает. не трогать
+function clearFight() {
   let champTables = document.querySelectorAll(".table td");
 
   if (BaronHpCurrent >= 0){
@@ -276,7 +276,7 @@ function clearFight() {       //все работает. не трогать
   }
 
   $("body").css({
-    "background" : "url(../img/pickPhase.jpg) no-repeat",
+    "background" : "url(img/pickPhase.jpg) no-repeat",
     "background-size": "100%"
   });
   $(".champs_in").show();
@@ -316,19 +316,19 @@ function clearFight() {       //все работает. не трогать
   return BaronHpCurrent;
 }
 
-function clearInGameZone() {      //все работает. не трогать
+function clearInGameZone() {
   location.reload();
 }
 
 logZone.on('DOMSubtreeModified', function(){$(".logZone > p").last()[0].scrollIntoView(false)});
 
-function startGame() {       //все работает. не трогать
+function startGame() {ь
   if (Array.from(field.children()).length == 0) {
   alert ("Чемпионы не выбраны!");
   start.one("click",startGame);
   return;}
   $("body").css({
-    "background" : "url(./img/fight.jpg) no-repeat",
+    "background" : "url(img/fight.jpg) no-repeat",
     "background-size": "115%"
   });
   $(".champs_in").hide();
