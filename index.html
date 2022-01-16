@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css" type="text/css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="intro">Smite Train
+    <div class="into__img">
+      <img src="./img/Smite.png" alt="Smite" class="smite" width="150px" height="150px">
+    </div>
+    <div class="intro__choose">
+      <h1>D</h1>
+      <h1>F</h1>
+  </div>
+  </div>
+  <div class="main">
+    <div class="BaronNashor">
+      <h1 class="BaronNashorHpText">Baron Nashor Hp </h1>
+      <div id="Hp">1000</div>
+        <div class="hpBar">
+          <div id="perc">
+            <div id="perc_in">
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="ingameMinuteZone"><span>Текущая минута игры</span><input type="number" min="20" max="99" value="20" class="ingameMinute">
+    </div>
+    <h1 class="champ_intro">Выберите персонажей</h1>
+      <div class="baronFight hide" ><img src="./img/Background.png" alt=""  class="" width="300px" height="300px">
+      </div>
+    <div class="SetUpMenu">
+      <div class="champs_in">
+        <img src="./img/Arrow.png" id="ChampArrow" width="30px" height="30px">
+        <div id="champions_list">
+          <button class="ChampButton"><img src="./img/Ahri.png" alt="Ahri" id="Ahri" class="ChampImg" data-object="Ahri" width="50px" height="50px"></button>
+          <button class="ChampButton"><img src="./img/Caitlyn.png" alt="Caitlyn" id="Caitlyn" class="ChampImg" data-object="Caitlyn" width="50px" height="50px"></button>
+          <button class="ChampButton"><img src="./img/Cassiopeia.png" alt="Cassiopeia" class="ChampImg" id="Cassiopeia" data-object="Cassiopeia" width="50px" height="50px"></button>
+          <button class="ChampButton"><img src="./img/Diana.png" alt="Diana" id="Diana" class="ChampImg" data-object="Diana" width="50px" height="50px"></button>
+          <button class="ChampButton"><img src="./img/TwistedFate.png" alt="TwistedFate" id="TwistedFate" class="ChampImg" data-object="TwistedFate" width="50px" height="50px"></button>
+          <button class="ChampButton"><img src="./img/Ziggs.png" alt="Ziggs" id="Ziggs" class="ChampImg" data-object="Ziggs" width="50px" height="50px"></button>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button id="Start"> Начать тренировку</button>
+      <button id="Clear"> Обновить текущий пак</button>
+      <button id="ClearField"> Очистить поле персонажей</button>
+      <button id="check" onclick="calcStats()">check</button>
+    </div>
+    <div class="logZone" id="logZone">
+    </div>
+    <div class="items_in">
+      <img src="./img/Arrow.png" id="ItemArrow" width="30px" height="30px">
+      <div class="items_list">
+        <button class="ItemButton"><img src="./img/AmplifyingTome.png" alt="./img/AmplifyingTome.png" class="ItemImg" data-name="AmplifyingTome" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/BFSword.png" alt="./img/BFSword.png" class="ItemImg" data-name="BFSword" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/BlastingWand.png" alt="./img/BlastingWand.png" class="ItemImg" data-name="BlastingWand" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/NeedlesslyLargeRod.png" alt="./img/NeedlesslyLargeRod.png" class="ItemImg" data-name="NeedlesslyLargeRod" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/Pickaxe.png" alt="./img/Pickaxe.png" class="ItemImg" data-name="Pickaxe" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/Dagger.png" alt="./img/Dagger.png" class="ItemImg" data-name="Dagger" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/BerserkerGreaves.png" alt="../img/BerserkerGreaves.png" class="ItemImg" data-name="BerserkerGreaves" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/BotrK.png" alt="./img/BotrK.png" class="ItemImg" data-name="BotrK" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/ImmortalShieldbow.png" alt="./img/ImmortalShieldbow.png" class="ItemImg" data-name="ImmortalShieldbow" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/Stormrazor.png" alt="./img/Stormrazor.png" class="ItemImg" data-name="Stormrazor" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/WitsEnd.png" alt="./img/WitsEnd.png" class="ItemImg" data-name="WitsEnd" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/YoumuusGhostblade.png" alt="./img/YoumuusGhostblade.png" class="ItemImg" data-name="YoumuusGhostblade" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/UmbralGlaive.png" alt="./img/UmbralGlaive.png" class="ItemImg" data-name="UmbralGlaive" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/TitanicHydra.png" alt="./img/TitanicHydra.png" class="ItemImg" data-name="TitanicHydra" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/Collector.png" alt="./img/Collector.png" class="ItemImg" data-name="Collector" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/SterakGage.png" alt="./img/SterakGage.png" class="ItemImg" data-name="SterakGage" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/InfinityEdge.png" alt="./img/InfinityEdge.png" class="ItemImg" data-name="InfinityEdge" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/LastWhisper.png" alt="./img/LastWhisper.png" class="ItemImg" data-name="LastWhisper" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/LordDominik.png" alt="./img/LordDominik.png" class="ItemImg" data-name="LordDominik" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/NashorsTooth.png" alt="./img/NashorsTooth.png" class="ItemImg" data-name="NashorsTooth" width="50px" height="50px"></button>
+        <button class="ItemButton"><img src="./img/RapidFirecannon.png" alt="./img/RapidFirecannon.png" class="ItemImg" data-name="RapidFirecannon" width="50px" height="50px"></button>
+      </div>
+    </div>
+    <div id="champions_field">
+    </div>
+  </div>
+  <script src="./js/JQuery.js"></script>
+  <script src="./js/ItemsDrag.js"></script>
+  <script src="./js/Menu.js"></script>
+  <script src="./js/champs.js"></script>
+  <script src="./js/items.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+</html>
