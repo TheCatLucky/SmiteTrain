@@ -54,7 +54,7 @@ $(".logZone").hide();
 function selectChamp() {
   let target = event.target;
   let name = target.getAttribute('data-object');
-  let picture = `<img src="./img/${name}.png" alt="${name}" id="${name}remove" class="ChampSelected" width="50px" height="50px"></img>`;
+  let picture = `<img src="img/${name}.png" alt="${name}" id="${name}remove" class="ChampSelected" width="50px" height="50px"></img>`;
   let div = document.createElement('div');
   if (target.tagName != 'IMG') return;
   if (field.children().length == 5) {
