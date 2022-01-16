@@ -175,7 +175,7 @@ function autoSmite() {
   let smite = setTimeout( function autoSmite() {
     smite = setTimeout(autoSmite,Math.random()*(500)+500);
     if(BaronHpCurrent <= 900) {
-      console.log (`Вы не успели засмайтить!
+      alert (`Вы не успели засмайтить!
       Вражеский лесник засмайтил на ${BaronHpCurrent} ХП!`);
       BaronHpCurrent -=900;
       clearTimeout(smite);
@@ -183,8 +183,10 @@ function autoSmite() {
   },0)
 }
 
-function smite(keydown) {
-  if(keydown.keyCode == smiteKey){
+function smite() {
+ 
+   if(event.keyCode == smiteKey){
+    console.log(smiteKey)
     if (BaronHpCurrent <= 900){
       BaronHpCurrent -= 900;
       alert ("Вы засмайтили!");
@@ -198,10 +200,10 @@ function smite(keydown) {
     }
   }  
   $("body").one("click",smite);
-  return BaronHpCurrent;
+  return BaronHpCurrent; 
 }
 
-function checkBaronHp () {                               //все работает. не трогать
+function checkBaronHp () {
   let HpBar = $("#perc_in");
   let checkBaronHp = setTimeout( function checkBaronHpRecursion(){
     checkBaronHp = setTimeout(checkBaronHpRecursion,100); 
@@ -344,6 +346,8 @@ function startGame() {       //все работает. не трогать
   baronHpReg(); // исцеление
   autoSmite();
   clear.one("click",clearFight);
-  $("body").one("click",smite);
+  $(document).keydown(() => {
+    smite()
+  })
   return BaronHpCurrent;
 }
